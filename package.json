@@ -9,6 +9,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -19,9 +20,50 @@
   },
   "eslintConfig": {
     "extends": [
+      "plugin:react/recommended",
+      "airbnb",
+      "airbnb/hooks",
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "prettier"
+    ],
+    "plugins": [
+      "only-warn"
+    ],
+    "rules": {
+      "quotes": [
+        "error",
+        "single",
+        {
+          "avoidEscape": true
+        }
+      ],
+      "default-case": [
+        "error",
+        {
+          "commentPattern": "^No\\sdefault"
+        }
+      ],
+      "arrow-body-style": "off",
+      "no-console": "off",
+      "no-plusplus": [
+        "error",
+        {
+          "allowForLoopAfterthoughts": true
+        }
+      ],
+      "react/function-component-definition": 0,
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -34,5 +76,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-only-warn": "^1.0.3",
+    "eslint-plugin-react": "^7.30.1",
+    "prettier": "^2.7.1"
   }
 }
