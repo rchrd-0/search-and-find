@@ -11,6 +11,7 @@ const StyledHeader = styled.header`
   border-bottom-right-radius: 4px;
   background-color: lavender;
   font-size: 2rem;
+  padding: 10px;
 `;
 
 export default Header;
