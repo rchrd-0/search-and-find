@@ -13,6 +13,7 @@ const Main = () => {
 };
 
 const StyledMain = styled.main`
+  height: 100%;
   display: flex;
   justify-content: center;
   background-color: navajowhite;
