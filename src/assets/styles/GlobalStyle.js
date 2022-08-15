@@ -1,16 +1,19 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-html {
-  /* min-height: 100%;
+/* html {
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
+} */
+
+body {
   display: flex;
-  overflow-x: hidden; */
+  min-height: 100vh;
   font-family: 'Jost', Arial, Helvetica, sans-serif;
 }
 
-/* body {
-  display: flex;
-} */
+body > #root {
+  flex: 1;
+}
 
 a,
 a:visited {

@@ -5,7 +5,12 @@ import Image from './Image';
 import Footer from './Footer';
 
 const Main = () => {
-  return <main id="game" />;
+  return <StyledMain />;
 };
+
+const StyledMain = styled.main`
+  height: 100%;
+  background-color: navajowhite;
+`;
 
 export default Main;
