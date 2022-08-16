@@ -11,11 +11,23 @@ import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
 
 function App() {
-  const [offset, setOffset] = useState({ x: getOffsets.findX(), y: 0 });
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  // Set offsets on mount
+  useEffect(() => {
+    const offsetY = getOffsets.findY();
+    const offsetX = getOffsets.findX();
+    setOffset((prevState) => {
+      return {
+        ...prevState,
+        x: offsetX,
+        y: offsetY,
+      };
+    });
+  }, []);
 
   // Set y axis offset on scroll
   useEffect(() => {
-    console.log(offset);
     const setYScroll = () => {
       const offsetY = getOffsets.findY();
 
@@ -61,7 +73,7 @@ function App() {
       <GlobalStyle />
       <Theme>
         <Header />
-        <Main />
+        <Main offset={offset} />
       </Theme>
     </>
   );

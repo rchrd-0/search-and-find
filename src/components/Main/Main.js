@@ -5,12 +5,20 @@ import PropTypes from 'prop-types';
 import Image from './Image';
 import Footer from './Footer';
 
-const Main = () => {
+const Main = (props) => {
+  const { offset } = props;
   return (
     <StyledMain>
-      <Image />
+      <Image offset={offset} />
     </StyledMain>
   );
+};
+
+Main.propTypes = {
+  offset: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }),
 };
 
 const StyledMain = styled.main`

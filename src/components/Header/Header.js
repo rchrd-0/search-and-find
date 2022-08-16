@@ -12,6 +12,7 @@ const StyledHeader = styled.header`
   background-color: lavender;
   font-size: 2rem;
   padding: 10px;
+  height: 70px;
 `;
 
 export default Header;

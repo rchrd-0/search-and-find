@@ -6,7 +6,13 @@ const GlobalStyle = createGlobalStyle`
 } */
 
 body {
+  display: flex;
+  min-height: 100vh;
   font-family: 'Jost', Arial, Helvetica, sans-serif;
+}
+
+body > #root {
+  flex: 1;
 }
 
 a,
