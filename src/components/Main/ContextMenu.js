@@ -2,21 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Target from './Target';
-
 const ContextMenu = (props) => {
-  const { menu, target } = props;
+  const { menu } = props;
   return (
-    <>
-      <Target target={target} />
-      <StyledContext xAxis={menu.x} yAxis={menu.y}>
-        <List>
-          <ListItem>Donkey Kong</ListItem>
-          <ListItem>Donkey Kong</ListItem>
-          <ListItem>Donkey Kong</ListItem>
-        </List>
-      </StyledContext>
-    </>
+    <StyledContext xAxis={menu.x} yAxis={menu.y}>
+      <List>
+        <ListItem>Donkey Kong</ListItem>
+        <ListItem>Donkey Kong</ListItem>
+        <ListItem>Donkey Kong</ListItem>
+      </List>
+    </StyledContext>
   );
 };
 
@@ -24,13 +19,6 @@ ContextMenu.propTypes = {
   menu: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
-    active: PropTypes.bool,
-  }),
-
-  target: PropTypes.shape({
-    x: PropTypes.number,
-    y: PropTypes.number,
-    active: PropTypes.bool,
   }),
 };
 

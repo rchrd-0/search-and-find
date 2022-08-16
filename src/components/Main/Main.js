@@ -25,6 +25,7 @@ const StyledMain = styled.main`
   display: flex;
   justify-content: center;
   background-color: navajowhite;
+  overflow: hidden;
 `;
 
 export default Main;

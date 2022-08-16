@@ -23,6 +23,7 @@ const StyledTarget = styled.div`
   height: 120px;
   background-image: url('${(props) => props.src}');
   background-size: cover;
+  cursor: auto;
 `;
 
 export default Target;
