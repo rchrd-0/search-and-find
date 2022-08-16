@@ -18,14 +18,16 @@ const Image = (props) => {
   const toggleActive = () => setIsActive(!isActive);
 
   const handleClick = (e) => {
-    const windowSize = cursorOffset.getWindowSize();
+    const clientSize = cursorOffset.getClientSize();
     const cursor = cursorOffset.getCursor(e);
 
     const xOffsetTotal = cursor.x - offset.x;
     const yOffsetTotal = cursor.y + offset.y;
-    const horizontalBoundary = windowSize.width * 0.9;
+    // Image width = 95% of clientSize
+    const horizontalBoundary = Math.floor(clientSize.width * 0.95);
+    // Menu width = 200px, 85px gap between cursor and menu
     const horizontalMargin =
-      xOffsetTotal + 200 > horizontalBoundary ? -270 : 80;
+      xOffsetTotal + 285 > horizontalBoundary ? -305 : 85;
     const verticalMargin = -130;
 
     toggleActive();
@@ -33,7 +35,7 @@ const Image = (props) => {
       x: xOffsetTotal + horizontalMargin,
       y: yOffsetTotal + verticalMargin,
     });
-    setTarget({ x: xOffsetTotal - 50, y: yOffsetTotal - 130 });
+    setTarget({ x: xOffsetTotal - 65, y: yOffsetTotal - 135 });
   };
 
   return (
@@ -57,7 +59,7 @@ Image.propTypes = {
 
 const ComponentWrapper = styled.div`
   position: relative;
-  width: 90vw;
+  width: 95%;
 `;
 
 const EventWrapper = styled.div`

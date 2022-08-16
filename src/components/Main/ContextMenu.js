@@ -24,7 +24,6 @@ ContextMenu.propTypes = {
 
 const StyledContext = styled.div`
   width: 200px;
-  height: 175px;
   position: absolute;
   top: ${(props) => props.yAxis}px;
   left: ${(props) => props.xAxis}px;

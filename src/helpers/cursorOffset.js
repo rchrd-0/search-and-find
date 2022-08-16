@@ -1,13 +1,13 @@
-const getWindowSize = () => {
+const getClientSize = () => {
   return {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: document.body.clientWidth,
+    height: document.body.clientHeight,
   };
 };
 
 const findY = () => Math.ceil(document.scrollingElement.scrollTop);
 
-const findX = () => Math.ceil(window.innerWidth * 0.05);
+const findX = () => Math.ceil(document.body.clientWidth * 0.025);
 
 const getCursor = (e) => {
   return {
@@ -16,4 +16,4 @@ const getCursor = (e) => {
   };
 };
 
-export { getWindowSize, findY, findX, getCursor };
+export { getClientSize, findY, findX, getCursor };

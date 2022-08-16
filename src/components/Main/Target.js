@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import target100 from '../../assets/images/target100.svg';
+import cursor100 from '../../assets/images/cursor100.svg';
 
 const Target = (props) => {
   const { target } = props;
-  return <StyledTarget yAxis={target.y} xAxis={target.x} src={target100} />;
+  return <StyledTarget yAxis={target.y} xAxis={target.x} src={cursor100} />;
 };
 
 Target.propTypes = {
@@ -19,8 +20,8 @@ const StyledTarget = styled.div`
   position: absolute;
   top: ${(props) => props.yAxis}px;
   left: ${(props) => props.xAxis}px;
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   background-image: url('${(props) => props.src}');
   background-size: cover;
   cursor: auto;
