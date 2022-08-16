@@ -18,22 +18,22 @@ const Image = (props) => {
   const toggleActive = () => setIsActive(!isActive);
 
   const handleClick = (e) => {
+    const windowSize = cursorOffset.getWindowSize();
     const cursor = cursorOffset.getCursor(e);
+
+    const xOffsetTotal = cursor.x - offset.x;
+    const yOffsetTotal = cursor.y + offset.y;
+    const horizontalBoundary = windowSize.width * 0.9;
+    const horizontalMargin =
+      xOffsetTotal + 200 > horizontalBoundary ? -270 : 80;
+    const verticalMargin = -130;
+
     toggleActive();
-
-    setMenu((prevState) => {
-      return {
-        x: cursor.x - offset.x + 75,
-        y: cursor.y + offset.y - 130,
-      };
+    setMenu({
+      x: xOffsetTotal + horizontalMargin,
+      y: yOffsetTotal + verticalMargin,
     });
-
-    setTarget((prevState) => {
-      return {
-        x: cursor.x - offset.x - 53,
-        y: cursor.y + offset.y - 130,
-      };
-    });
+    setTarget({ x: xOffsetTotal - 50, y: yOffsetTotal - 130 });
   };
 
   return (
@@ -70,7 +70,6 @@ const StyledImage = styled.img`
   height: auto;
   user-select: none;
   pointer-events: none;
-  content: url('${(props) => props.src}');
 `;
 
 export default Image;

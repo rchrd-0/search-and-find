@@ -1,3 +1,10 @@
+const getWindowSize = () => {
+  return {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
+};
+
 const findY = () => Math.ceil(document.scrollingElement.scrollTop);
 
 const findX = () => Math.ceil(window.innerWidth * 0.05);
@@ -9,4 +16,4 @@ const getCursor = (e) => {
   };
 };
 
-export { findY, findX, getCursor };
+export { getWindowSize, findY, findX, getCursor };

@@ -23,10 +23,14 @@ ContextMenu.propTypes = {
 };
 
 const StyledContext = styled.div`
+  width: 200px;
+  height: 175px;
   position: absolute;
   top: ${(props) => props.yAxis}px;
   left: ${(props) => props.xAxis}px;
   z-index: 1;
+  display: flex;
+  align-items: center;
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.75);
   user-select: none;
@@ -36,16 +40,14 @@ const StyledContext = styled.div`
 `;
 
 const List = styled.ul`
+  flex: 1;
   padding: 0 16px;
-  display: flex;
-  flex-direction: column;
   list-style-type: none;
   color: white;
   font-size: 1.4rem;
 `;
 
 const ListItem = styled.li`
-  display: flex;
   padding: 12px 0;
   border-bottom: 1px solid white;
 
