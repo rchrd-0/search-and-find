@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Main from './components/Main/Main';
 import Header from './components/Header/Header';
-import * as getOffsets from './helpers/getOffsets';
+import * as cursorOffset from './helpers/cursorOffset';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
 import Theme from './assets/styles/Theme';
@@ -15,8 +15,8 @@ function App() {
 
   // Set offsets on mount
   useEffect(() => {
-    const offsetY = getOffsets.findY();
-    const offsetX = getOffsets.findX();
+    const offsetY = cursorOffset.findY();
+    const offsetX = cursorOffset.findX();
     setOffset((prevState) => {
       return {
         ...prevState,
@@ -29,7 +29,7 @@ function App() {
   // Set y axis offset on scroll
   useEffect(() => {
     const setYScroll = () => {
-      const offsetY = getOffsets.findY();
+      const offsetY = cursorOffset.findY();
 
       setOffset((prevState) => {
         return {
@@ -49,8 +49,8 @@ function App() {
   // Set x & y axes offsets on resize
   useEffect(() => {
     const setXYResize = () => {
-      const offsetY = getOffsets.findY();
-      const offsetX = getOffsets.findX();
+      const offsetY = cursorOffset.findY();
+      const offsetX = cursorOffset.findX();
 
       setOffset((prevState) => {
         return {
