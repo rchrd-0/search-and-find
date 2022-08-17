@@ -3,10 +3,20 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import target64 from '../../assets/icons/target64.svg';
 // import cursor64 from '../../assets/icons/cursor64.svg';
+import * as cursorOffset from '../../helpers/cursorOffset';
 
 const Target = (props) => {
   const { target } = props;
-  return <StyledTarget yAxis={target.y} xAxis={target.x} src={target64} />;
+  const offset = cursorOffset.getTargetOffset();
+  return (
+    <StyledTarget
+      yAxis={target.y}
+      yOffset={offset.y}
+      xAxis={target.x}
+      xOffset={offset.x}
+      src={target64}
+    />
+  );
 };
 
 Target.propTypes = {
@@ -18,8 +28,8 @@ Target.propTypes = {
 
 const StyledTarget = styled.div`
   position: absolute;
-  top: ${(props) => props.yAxis}px;
-  left: ${(props) => props.xAxis}px;
+  top: calc(${(props) => props.yAxis}% - ${(props) => props.yOffset}px);
+  left: calc(${(props) => props.xAxis}% - ${(props) => props.xOffset}px);
   width: 64px;
   height: 64px;
   background-image: url('${(props) => props.src}');

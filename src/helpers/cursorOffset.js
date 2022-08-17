@@ -16,23 +16,29 @@ const getCursor = (e) => {
   };
 };
 
-const getContextOffset = (offsetWidth, x) => {
-  const contextMenuWidth = 200;
-  const headerHeight = 60;
-  const cursorSize = 64;
-  const targetMenuGap = 16;
+const appOffsets = {
+  contextMenuWidth: 200,
+  headerHeight: 60,
+  cursorSize: 64,
+  targetMenuGap: 16,
+};
 
-  const menuX =
-    x + cursorSize / 2 + targetMenuGap + contextMenuWidth > offsetWidth
-      ? -(contextMenuWidth + cursorSize / 2 + 16)
-      : cursorSize / 2 + targetMenuGap;
+const getTargetOffset = () => {
+  const { cursorSize, headerHeight } = appOffsets;
 
   return {
-    targetX: cursorSize / 2,
-    targetY: headerHeight + cursorSize / 2,
-    menuX,
-    menuY: 120,
+    x: cursorSize / 2,
+    y: headerHeight + cursorSize / 2,
   };
 };
 
-export { getClientSize, findY, findX, getCursor, getContextOffset };
+const leftOrRight = (offsetWidth, x) => {
+  const xPx = x * offsetWidth;
+  const { cursorSize, targetMenuGap, contextMenuWidth } = appOffsets;
+
+  return xPx + cursorSize / 2 + targetMenuGap + contextMenuWidth > offsetWidth
+    ? -(contextMenuWidth + cursorSize / 2 + 16)
+    : cursorSize / 2 + targetMenuGap;
+};
+
+export { getClientSize, findY, findX, getCursor, getTargetOffset, leftOrRight };

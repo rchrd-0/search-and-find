@@ -12,7 +12,7 @@ const ContextMenu = (props) => {
   );
 
   return (
-    <StyledContext xAxis={menu.x} yAxis={menu.y}>
+    <StyledContext xAxis={menu.x} yAxis={menu.y} leftRight={menu.leftRight}>
       <List>
         {charList.map((item) => (
           <ListItem key={item.id} img={imgs[`${item.img}.png`]}>
@@ -28,6 +28,7 @@ ContextMenu.propTypes = {
   menu: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
+    leftRight: PropTypes.number,
   }),
   charList: PropTypes.arrayOf(
     PropTypes.shape({
@@ -41,8 +42,8 @@ ContextMenu.propTypes = {
 const StyledContext = styled.div`
   width: 200px;
   position: absolute;
-  top: ${(props) => props.yAxis}px;
-  left: ${(props) => props.xAxis}px;
+  top: calc(${(props) => props.yAxis}% - 120px);
+  left: calc(${(props) => props.xAxis}% + ${(props) => props.leftRight}px);
   z-index: 1;
   display: flex;
   align-items: center;

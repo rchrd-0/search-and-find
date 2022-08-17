@@ -11,7 +11,8 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 const Image = (props) => {
   const { level } = props;
 
-  const [menu, setMenu] = useState({ x: 0, y: 0 });
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [menu, setMenu] = useState({ x: 0, y: 0, leftRight: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
 
@@ -21,30 +22,38 @@ const Image = (props) => {
 
   const imgRef = useRef();
 
-  const toggleActive = () => setIsActive(!isActive);
-
   const handleClick = (e) => {
-    const cursor = cursorOffset.getCursor(e);
-    const contextOffset = cursorOffset.getContextOffset(
-      imgRef.current.offsetWidth,
-      cursor.x
-    );
+    const { pageX, pageY } = e;
 
-    setMenu({
-      x: cursor.x + contextOffset.menuX,
-      y: cursor.y - contextOffset.menuY,
+    setCursor({
+      x: pageX / imgRef.current.offsetWidth,
+      y: pageY / imgRef.current.offsetHeight,
     });
-    setTarget({
-      x: cursor.x - contextOffset.targetX,
-      y: cursor.y - contextOffset.targetY,
-    });
-    toggleActive();
   };
+
+  useEffect(() => {
+    setMenu({
+      x: cursor.x * 100,
+      y: cursor.y * 100,
+      leftRight: cursorOffset.leftOrRight(imgRef.current.offsetWidth, cursor.x),
+    });
+
+    setTarget({
+      x: cursor.x * 100,
+      y: cursor.y * 100,
+    });
+
+    setIsActive((prevState) => !prevState);
+  }, [cursor]);
 
   return (
     <ComponentWrapper>
       {isActive ? <ContextMenu menu={menu} charList={level.charList} /> : null}
-      <EventWrapper customCursor={cursor64} onClick={handleClick} ref={imgRef}>
+      <EventWrapper
+        customCursor={cursor64}
+        onClick={(e) => handleClick(e)}
+        ref={imgRef}
+      >
         {isActive ? <Target target={target} /> : null}
         <StyledImage src={imgs[`${level.img}.png`]} />
       </EventWrapper>
