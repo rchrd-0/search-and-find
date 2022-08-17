@@ -4,12 +4,17 @@ import PropTypes from 'prop-types';
 
 import Image from './Image';
 import Footer from './Footer';
+import charManifest from '../../assets/imageCharManifest';
 
 const Main = (props) => {
   const { offset } = props;
+  const [level, setLevel] = useState('snes');
+
+  const levelManifest = charManifest.find((obj) => obj.id === level);
+
   return (
     <StyledMain>
-      <Image offset={offset} />
+      <Image offset={offset} level={levelManifest} />
     </StyledMain>
   );
 };

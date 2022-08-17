@@ -2,14 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import importAll from '../../helpers/importAll';
+
 const ContextMenu = (props) => {
-  const { menu } = props;
+  const { menu, charList } = props;
+
+  const imgs = importAll(
+    require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
+  );
+
   return (
     <StyledContext xAxis={menu.x} yAxis={menu.y}>
       <List>
-        <ListItem>Donkey Kong</ListItem>
-        <ListItem>Donkey Kong</ListItem>
-        <ListItem>Donkey Kong</ListItem>
+        {charList.map((item) => (
+          <ListItem key={item.id} img={imgs[`${item.img}.png`]}>
+            {item.name}
+          </ListItem>
+        ))}
       </List>
     </StyledContext>
   );
@@ -20,6 +29,13 @@ ContextMenu.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
+  charList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      img: PropTypes.string,
+    })
+  ),
 };
 
 const StyledContext = styled.div`
@@ -40,18 +56,26 @@ const StyledContext = styled.div`
 
 const List = styled.ul`
   flex: 1;
-  padding: 0 16px;
   list-style-type: none;
   color: white;
+  border-radius: 8px;
   font-size: 1.4rem;
 `;
 
 const ListItem = styled.li`
-  padding: 12px 0;
+  display: flex;
+  padding: 12px 16px 12px 58px;
   border-bottom: 1px solid white;
+  background-image: url('${(props) => props.img}');
+  background-size: 32px;
+  background-position: 16px center;
+  background-repeat: no-repeat;
 
   &:last-of-type {
     border: none;
+  }
+
+  &:hover {
   }
 `;
 

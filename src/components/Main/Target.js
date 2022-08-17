@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import target100 from '../../assets/images/target100.svg';
-import cursor100 from '../../assets/images/cursor100.svg';
+import target100 from '../../assets/icons/target100.svg';
 
 const Target = (props) => {
   const { target } = props;
-  return <StyledTarget yAxis={target.y} xAxis={target.x} src={cursor100} />;
+  return <StyledTarget yAxis={target.y} xAxis={target.x} src={target100} />;
 };
 
 Target.propTypes = {

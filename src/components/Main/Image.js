@@ -5,15 +5,19 @@ import PropTypes from 'prop-types';
 import ContextMenu from './ContextMenu';
 import Target from './Target';
 import * as cursorOffset from '../../helpers/cursorOffset';
-import snes from '../../assets/images/snes.png';
-import cursor100 from '../../assets/images/cursor100.svg';
+import importAll from '../../helpers/importAll';
+import cursor100 from '../../assets/icons/cursor100.svg';
 
 const Image = (props) => {
-  const { offset } = props;
+  const { offset, level } = props;
 
   const [menu, setMenu] = useState({ x: 0, y: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
+
+  const imgs = importAll(
+    require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
+  );
 
   const toggleActive = () => setIsActive(!isActive);
 
@@ -40,10 +44,10 @@ const Image = (props) => {
 
   return (
     <ComponentWrapper>
-      {isActive ? <ContextMenu menu={menu} /> : null}
+      {isActive ? <ContextMenu menu={menu} charList={level.charList} /> : null}
       <EventWrapper customCursor={cursor100} onClick={handleClick}>
         {isActive ? <Target target={target} /> : null}
-        <StyledImage src={snes} />
+        <StyledImage src={imgs[`${level.img}.png`]} />
       </EventWrapper>
     </ComponentWrapper>
   );
@@ -54,6 +58,17 @@ Image.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
     active: PropTypes.bool,
+  }),
+  level: PropTypes.shape({
+    id: PropTypes.string,
+    img: PropTypes.string,
+    charList: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        img: PropTypes.string,
+      })
+    ),
   }),
 };
 
