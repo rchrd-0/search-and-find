@@ -11,69 +11,70 @@ import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
 
 function App() {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // const [offset, setOffset] = useState({ x: 0, y: 0 });
 
   // Set offsets on mount
-  useEffect(() => {
-    const offsetY = cursorOffset.findY();
-    const offsetX = cursorOffset.findX();
-    setOffset((prevState) => {
-      return {
-        ...prevState,
-        x: offsetX,
-        y: offsetY,
-      };
-    });
-  }, []);
+  // useEffect(() => {
+  //   const offsetY = cursorOffset.findY();
+  //   const offsetX = cursorOffset.findX();
+  //   setOffset((prevState) => {
+  //     return {
+  //       ...prevState,
+  //       x: offsetX,
+  //       y: offsetY,
+  //     };
+  //   });
+  // }, []);
 
-  // Set y axis offset on scroll
-  useEffect(() => {
-    const setYScroll = () => {
-      const offsetY = cursorOffset.findY();
+  // // Set y axis offset on scroll
+  // useEffect(() => {
+  //   const setYScroll = () => {
+  //     const offsetY = cursorOffset.findY();
 
-      setOffset((prevState) => {
-        return {
-          ...prevState,
-          y: offsetY,
-        };
-      });
-    };
+  //     setOffset((prevState) => {
+  //       return {
+  //         ...prevState,
+  //         y: offsetY,
+  //       };
+  //     });
+  //   };
 
-    document.addEventListener('scroll', setYScroll);
+  //   document.addEventListener('scroll', setYScroll);
 
-    return () => {
-      document.removeEventListener('scroll', setYScroll);
-    };
-  });
+  //   return () => {
+  //     document.removeEventListener('scroll', setYScroll);
+  //   };
+  // });
 
-  // Set x & y axes offsets on resize
-  useEffect(() => {
-    const setXYResize = () => {
-      const offsetY = cursorOffset.findY();
-      const offsetX = cursorOffset.findX();
+  // // Set x & y axes offsets on resize
+  // useEffect(() => {
+  //   const setXYResize = () => {
+  //     const offsetY = cursorOffset.findY();
+  //     const offsetX = cursorOffset.findX();
 
-      setOffset((prevState) => {
-        return {
-          ...prevState,
-          x: offsetX,
-          y: offsetY,
-        };
-      });
-    };
+  //     setOffset((prevState) => {
+  //       return {
+  //         ...prevState,
+  //         x: offsetX,
+  //         y: offsetY,
+  //       };
+  //     });
+  //   };
 
-    window.addEventListener('resize', setXYResize);
+  //   window.addEventListener('resize', setXYResize);
 
-    return () => {
-      window.removeEventListener('resize', setXYResize);
-    };
-  });
+  //   return () => {
+  //     window.removeEventListener('resize', setXYResize);
+  //   };
+  // });
 
   return (
     <>
       <GlobalStyle />
       <Theme>
         <Header />
-        <Main offset={offset} />
+        {/* <Main offset={offset} /> */}
+        <Main />
       </Theme>
     </>
   );

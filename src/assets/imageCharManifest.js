@@ -1,7 +1,7 @@
 const charManifest = [
   {
     id: 'snes',
-    img: 'snes',
+    img: 'snes-invis',
     charList: [
       {
         id: 'donkey-kong',

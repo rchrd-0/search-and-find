@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import target100 from '../../assets/icons/target100.svg';
+import target64 from '../../assets/icons/target64.svg';
+// import cursor64 from '../../assets/icons/cursor64.svg';
 
 const Target = (props) => {
   const { target } = props;
-  return <StyledTarget yAxis={target.y} xAxis={target.x} src={target100} />;
+  return <StyledTarget yAxis={target.y} xAxis={target.x} src={target64} />;
 };
 
 Target.propTypes = {
@@ -19,8 +20,8 @@ const StyledTarget = styled.div`
   position: absolute;
   top: ${(props) => props.yAxis}px;
   left: ${(props) => props.xAxis}px;
-  width: 130px;
-  height: 130px;
+  width: 64px;
+  height: 64px;
   background-image: url('${(props) => props.src}');
   background-size: cover;
   cursor: auto;
