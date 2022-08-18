@@ -8,6 +8,7 @@ import * as cursorOffset from '../../helpers/cursorOffset';
 const Target = (props) => {
   const { target } = props;
   const offset = cursorOffset.getTargetOffset();
+
   return (
     <StyledTarget
       yAxis={target.y}

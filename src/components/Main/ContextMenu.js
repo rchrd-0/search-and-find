@@ -11,11 +11,19 @@ const ContextMenu = (props) => {
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
   );
 
+  const handleClick = (id) => {
+    console.log(id);
+  };
+
   return (
     <StyledContext xAxis={menu.x} yAxis={menu.y} leftRight={menu.leftRight}>
       <List>
         {charList.map((item) => (
-          <ListItem key={item.id} img={imgs[`${item.img}.png`]}>
+          <ListItem
+            key={item.id}
+            img={imgs[`${item.img}.png`]}
+            onClick={() => handleClick(item.id)}
+          >
             {item.name}
           </ListItem>
         ))}
@@ -44,7 +52,6 @@ const StyledContext = styled.div`
   position: absolute;
   top: calc(${(props) => props.yAxis}% - 120px);
   left: calc(${(props) => props.xAxis}% + ${(props) => props.leftRight}px);
-  z-index: 1;
   display: flex;
   align-items: center;
   border-radius: 8px;

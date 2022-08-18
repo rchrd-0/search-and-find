@@ -14,7 +14,7 @@ const charManifest = [
         img: 'snes-chrono',
       },
       {
-        id: 'alttp',
+        id: 'link-to-past',
         name: 'Link',
         img: 'snes-link',
       },
