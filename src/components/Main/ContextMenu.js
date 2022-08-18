@@ -6,6 +6,7 @@ import importAll from '../../helpers/importAll';
 
 const ContextMenu = (props) => {
   const { menu, characters, handleClick } = props;
+  const remainingChars = characters.filter((char) => !char.found);
 
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
@@ -19,7 +20,7 @@ const ContextMenu = (props) => {
       leftRight={menu.leftRight}
     >
       <List>
-        {characters.map((item) => (
+        {remainingChars.map((item) => (
           <ListItem
             key={item.id}
             img={imgs[`${item.img}.png`]}
