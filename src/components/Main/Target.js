@@ -2,22 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import target64 from '../../assets/icons/target64.svg';
-// import cursor64 from '../../assets/icons/cursor64.svg';
-import * as cursorOffset from '../../helpers/cursorOffset';
+import cursor64 from '../../assets/icons/cursor64.svg';
 
 const Target = (props) => {
   const { target } = props;
-  const offset = cursorOffset.getTargetOffset();
 
-  return (
-    <StyledTarget
-      yAxis={target.y}
-      yOffset={offset.y}
-      xAxis={target.x}
-      xOffset={offset.x}
-      src={target64}
-    />
-  );
+  return <StyledTarget target={target} src={target64} />;
 };
 
 Target.propTypes = {
@@ -29,8 +19,10 @@ Target.propTypes = {
 
 const StyledTarget = styled.div`
   position: absolute;
-  top: calc(${(props) => props.yAxis}% - ${(props) => props.yOffset}px);
-  left: calc(${(props) => props.xAxis}% - ${(props) => props.xOffset}px);
+  top: ${(props) => props.target.y}%;
+  left: ${(props) => props.target.x}%;
+  margin-left: -32px;
+  margin-top: -32px;
   width: 64px;
   height: 64px;
   background-image: url('${(props) => props.src}');

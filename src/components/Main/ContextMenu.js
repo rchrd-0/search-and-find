@@ -12,7 +12,12 @@ const ContextMenu = (props) => {
   );
 
   return (
-    <StyledContext xAxis={menu.x} yAxis={menu.y} leftRight={menu.leftRight}>
+    <StyledContext
+      menu={menu}
+      xAxis={menu.x}
+      yAxis={menu.y}
+      leftRight={menu.leftRight}
+    >
       <List>
         {charList.map((item) => (
           <ListItem
@@ -47,8 +52,10 @@ ContextMenu.propTypes = {
 const StyledContext = styled.div`
   width: 200px;
   position: absolute;
-  top: calc(${(props) => props.yAxis}% - 120px);
-  left: calc(${(props) => props.xAxis}% + ${(props) => props.leftRight}px);
+  top: ${(props) => props.menu.y}%;
+  left: ${(props) => props.menu.x}%;
+  margin-top: -60px;
+  margin-left: ${(props) => props.menu.margin}px;
   display: flex;
   align-items: center;
   border-radius: 8px;

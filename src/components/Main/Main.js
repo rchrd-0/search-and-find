@@ -19,20 +19,18 @@ const Main = (props) => {
   const [level, setLevel] = useState('snes');
   const [levelManifest, setLevelManifest] = useState({});
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
-  const [menu, setMenu] = useState({ x: 0, y: 0, leftRight: 0 });
+  const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
 
   const mainRef = useRef();
 
-  const toggleContext = () => setIsActive(!isActive);
-
   const handleMainClick = (e) => {
     const { pageX, pageY } = e;
-    // console.log(
-    //   pageX / mainRef.current.offsetWidth,
-    //   pageY / mainRef.current.offsetHeight
-    // );
+    console.log(
+      pageX / mainRef.current.offsetWidth,
+      pageY / mainRef.current.offsetHeight
+    );
 
     setCursor({
       x: pageX / mainRef.current.offsetWidth,
@@ -42,7 +40,6 @@ const Main = (props) => {
 
   const handleMenuClick = async (id) => {
     const characterCoord = await firebase.getTarget(id, level);
-
     const result = checkGame.isInRange(cursor, characterCoord);
     console.log(result);
     setIsActive(false);
@@ -56,18 +53,18 @@ const Main = (props) => {
 
   // Determines target & context menu placement on cursor state change
   useEffect(() => {
+    const { offsetWidth, offsetHeight } = mainRef.current;
+    const relativeToHeader = cursorOffset.getHeaderRelative(offsetHeight);
+
     setMenu({
       x: cursor.x * 100,
-      y: cursor.y * 100,
-      leftRight: cursorOffset.leftOrRight(
-        mainRef.current.offsetWidth,
-        cursor.x
-      ),
+      y: cursor.y * 100 - relativeToHeader,
+      margin: cursorOffset.getMenuMargin(offsetWidth, cursor.x),
     });
 
     setTarget({
       x: cursor.x * 100,
-      y: cursor.y * 100,
+      y: cursor.y * 100 - relativeToHeader,
     });
 
     setIsActive((prevState) => !prevState);
@@ -108,7 +105,6 @@ const StyledMain = styled.main`
   background-color: navajowhite;
   overflow: hidden;
   user-select: none;
-  cursor: url('${(props) => props.customCursor}') 32 32, auto;
 `;
 
 const EventWrapper = styled.div`

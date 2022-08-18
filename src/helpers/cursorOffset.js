@@ -1,20 +1,13 @@
-const getClientSize = () => {
-  return {
-    width: document.body.clientWidth,
-    height: document.body.clientHeight,
-  };
-};
+// const getClientSize = () => {
+//   return {
+//     width: document.body.clientWidth,
+//     height: document.body.clientHeight,
+//   };
+// };
 
-const findY = () => Math.ceil(document.scrollingElement.scrollTop);
+// const findY = () => Math.ceil(document.scrollingElement.scrollTop);
 
-const findX = () => Math.ceil(document.body.clientWidth * 0.025);
-
-const getCursor = (e) => {
-  return {
-    x: e.pageX,
-    y: e.pageY,
-  };
-};
+// const findX = () => Math.ceil(document.body.clientWidth * 0.025);
 
 const appOffsets = {
   contextMenuWidth: 200,
@@ -23,16 +16,17 @@ const appOffsets = {
   targetMenuGap: 16,
 };
 
-const getTargetOffset = () => {
-  const { cursorSizeHalf, headerHeight } = appOffsets;
-
+const getCursor = (e) => {
   return {
-    x: cursorSizeHalf,
-    y: headerHeight + cursorSizeHalf,
+    x: e.pageX,
+    y: e.pageY,
   };
 };
 
-const leftOrRight = (offsetWidth, x) => {
+const getHeaderRelative = (offsetHeight) =>
+  (appOffsets.headerHeight / offsetHeight) * 100;
+
+const getMenuMargin = (offsetWidth, x) => {
   const { cursorSizeHalf, targetMenuGap, contextMenuWidth } = appOffsets;
   const absoluteX = x * offsetWidth;
   const margin = cursorSizeHalf + targetMenuGap + contextMenuWidth;
@@ -42,4 +36,11 @@ const leftOrRight = (offsetWidth, x) => {
     : cursorSizeHalf + targetMenuGap;
 };
 
-export { getClientSize, findY, findX, getCursor, getTargetOffset, leftOrRight };
+export {
+  // getClientSize,
+  // findY,
+  // findX,
+  getCursor,
+  getHeaderRelative,
+  getMenuMargin,
+};
