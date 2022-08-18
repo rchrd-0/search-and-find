@@ -7,6 +7,7 @@ import { db } from '../../firebase/firebase-config';
 import * as firebase from '../../helpers/firebase';
 
 import Header from '../Header/Header';
+import Snackbar from './Snackbar';
 import ContextMenu from './ContextMenu';
 import Target from './Target';
 import Image from './Image';
@@ -23,11 +24,16 @@ const Main = ({ children, props }) => {
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
+  const [snackbarHidden, setSnackbarHidden] = useState(true);
+  const [snackbarActive, setSnackbarActive] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    char: '',
+    success: false,
+  });
 
   const mainRef = useRef();
 
   const handleMainClick = (e) => {
-    // console.log(characters);
     const { pageX, pageY } = e;
     // console.log(
     //   pageX / mainRef.current.offsetWidth,
@@ -43,9 +49,9 @@ const Main = ({ children, props }) => {
   const handleMenuClick = async (id) => {
     const characterCoord = await firebase.getTarget(id, level);
     const result = checkGame.isInRange(cursor, characterCoord);
-    console.log(result);
 
     if (result) {
+      const foundName = characters.find((char) => char.id === id).name;
       const updatedCharacters = characters.map((char) => {
         if (char.id === id) {
           return {
@@ -58,7 +64,18 @@ const Main = ({ children, props }) => {
       });
 
       setCharacters(updatedCharacters);
+
+      setSnackbar((prevState) => ({
+        char: foundName,
+        success: true,
+      }));
+    } else {
+      setSnackbar((prevState) => ({
+        char: '',
+        success: false,
+      }));
     }
+    setSnackbarHidden(false);
     setIsActive(false);
   };
 
@@ -87,9 +104,42 @@ const Main = ({ children, props }) => {
     setIsActive((prevState) => !prevState);
   }, [cursor]);
 
+  useEffect(() => {
+    if (!snackbarHidden) {
+      const appear = setTimeout(() => {
+        setSnackbarActive(true);
+
+        const disappear = setTimeout(() => {
+          setSnackbarActive(false);
+
+          const hide = setTimeout(() => {
+            setSnackbarHidden(true);
+          }, 100);
+
+          return () => {
+            clearTimeout(hide);
+          };
+        }, 2500);
+
+        return () => {
+          clearTimeout(disappear);
+        };
+      }, 100);
+
+      return () => {
+        clearTimeout(appear);
+      };
+    }
+  }, [snackbarHidden]);
+
   return (
     <StyledMain>
       <Header characters={characters} />
+      <Snackbar
+        content={snackbar}
+        active={snackbarActive}
+        visible={snackbarHidden}
+      />
       <GameWrapper>
         {isActive ? (
           <ContextMenu

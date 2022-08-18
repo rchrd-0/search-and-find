@@ -22,6 +22,15 @@ a:visited {
   user-select: none;
 }
 
+.display-none {
+  display: none;
+}
+
+.opacity-1 {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
 /* button {
   padding: 6px 12px;
   cursor: pointer;
