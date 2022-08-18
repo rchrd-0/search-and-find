@@ -19,7 +19,7 @@ Image.propTypes = {
 };
 
 const StyledImage = styled.img`
-  min-width: 700px;
+  min-width: 900px;
   width: 100%;
   height: auto;
   user-select: none;

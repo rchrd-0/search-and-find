@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import importAll from '../../helpers/importAll';
 
 const ContextMenu = (props) => {
-  const { menu, charList, handleClick } = props;
+  const { menu, characters, handleClick } = props;
 
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
@@ -19,7 +19,7 @@ const ContextMenu = (props) => {
       leftRight={menu.leftRight}
     >
       <List>
-        {charList.map((item) => (
+        {characters.map((item) => (
           <ListItem
             key={item.id}
             img={imgs[`${item.img}.png`]}
@@ -39,7 +39,7 @@ ContextMenu.propTypes = {
     y: PropTypes.number,
     leftRight: PropTypes.number,
   }),
-  charList: PropTypes.arrayOf(
+  characters: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,

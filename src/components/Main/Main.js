@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+
 import { db } from '../../firebase/firebase-config';
 import * as firebase from '../../helpers/firebase';
 
+import Header from '../Header/Header';
 import ContextMenu from './ContextMenu';
 import Target from './Target';
 import Image from './Image';
@@ -15,9 +16,9 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 import charManifest from '../../assets/imageCharManifest';
 import * as checkGame from '../../helpers/checkGame';
 
-const Main = (props) => {
+const Main = ({ children, props }) => {
   const [level, setLevel] = useState('snes');
-  const [levelManifest, setLevelManifest] = useState({});
+  const [characters, setCharacters] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
@@ -26,11 +27,12 @@ const Main = (props) => {
   const mainRef = useRef();
 
   const handleMainClick = (e) => {
+    // console.log(characters);
     const { pageX, pageY } = e;
-    console.log(
-      pageX / mainRef.current.offsetWidth,
-      pageY / mainRef.current.offsetHeight
-    );
+    // console.log(
+    //   pageX / mainRef.current.offsetWidth,
+    //   pageY / mainRef.current.offsetHeight
+    // );
 
     setCursor({
       x: pageX / mainRef.current.offsetWidth,
@@ -42,13 +44,28 @@ const Main = (props) => {
     const characterCoord = await firebase.getTarget(id, level);
     const result = checkGame.isInRange(cursor, characterCoord);
     console.log(result);
+
+    if (result) {
+      const updatedCharacters = characters.map((char) => {
+        if (char.id === id) {
+          return {
+            ...char,
+            found: true,
+          };
+        }
+
+        return char;
+      });
+
+      setCharacters(updatedCharacters);
+    }
     setIsActive(false);
   };
 
   // Sets level manifest to correct object on mount
   useEffect(() => {
     const thisLevel = charManifest.find((obj) => obj.id === level);
-    setLevelManifest(thisLevel);
+    setCharacters(thisLevel.charList.map((obj) => ({ ...obj, found: false })));
   }, []);
 
   // Determines target & context menu placement on cursor state change
@@ -72,21 +89,24 @@ const Main = (props) => {
 
   return (
     <StyledMain>
-      {isActive ? (
-        <ContextMenu
-          menu={menu}
-          charList={levelManifest.charList}
-          handleClick={handleMenuClick}
-        />
-      ) : null}
-      <EventWrapper
-        customCursor={cursor64}
-        onClick={handleMainClick}
-        ref={mainRef}
-      >
-        {isActive ? <Target target={target} /> : null}
-        <Image level={level} />
-      </EventWrapper>
+      <Header characters={characters} />
+      <GameWrapper>
+        {isActive ? (
+          <ContextMenu
+            menu={menu}
+            characters={characters}
+            handleClick={handleMenuClick}
+          />
+        ) : null}
+        <EventWrapper
+          customCursor={cursor64}
+          onClick={handleMainClick}
+          ref={mainRef}
+        >
+          {isActive ? <Target target={target} /> : null}
+          <Image level={level} />
+        </EventWrapper>
+      </GameWrapper>
     </StyledMain>
   );
 };
@@ -99,12 +119,13 @@ Main.propTypes = {
 };
 
 const StyledMain = styled.main`
-  position: relative;
-  margin-top: 60px;
-  justify-content: center;
-  background-color: navajowhite;
   overflow: hidden;
   user-select: none;
+`;
+
+const GameWrapper = styled.div`
+  position: relative;
+  margin-top: 60px;
 `;
 
 const EventWrapper = styled.div`

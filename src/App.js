@@ -72,8 +72,6 @@ function App() {
     <>
       <GlobalStyle />
       <Theme>
-        <Header />
-        {/* <Main offset={offset} /> */}
         <Main />
       </Theme>
     </>
