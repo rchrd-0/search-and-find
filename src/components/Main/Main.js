@@ -13,6 +13,7 @@ import Image from './Image';
 import * as cursorOffset from '../../helpers/cursorOffset';
 import cursor64 from '../../assets/icons/cursor64.svg';
 import charManifest from '../../assets/imageCharManifest';
+import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
   const [level, setLevel] = useState('snes');
@@ -28,6 +29,10 @@ const Main = (props) => {
 
   const handleMainClick = (e) => {
     const { pageX, pageY } = e;
+    // console.log(
+    //   pageX / mainRef.current.offsetWidth,
+    //   pageY / mainRef.current.offsetHeight
+    // );
 
     setCursor({
       x: pageX / mainRef.current.offsetWidth,
@@ -37,7 +42,9 @@ const Main = (props) => {
 
   const handleMenuClick = async (id) => {
     const characterCoord = await firebase.getTarget(id, level);
-    console.log(characterCoord);
+
+    const result = checkGame.isInRange(cursor, characterCoord);
+    console.log(result);
     setIsActive(false);
   };
 
