@@ -1,9 +1,9 @@
-// const getClientSize = () => {
-//   return {
-//     width: document.body.clientWidth,
-//     height: document.body.clientHeight,
-//   };
-// };
+const getClientSize = () => {
+  return {
+    width: document.body.clientWidth,
+    height: document.body.clientHeight,
+  };
+};
 
 // const findY = () => Math.ceil(document.scrollingElement.scrollTop);
 
@@ -37,7 +37,7 @@ const getMenuMargin = (offsetWidth, x) => {
 };
 
 export {
-  // getClientSize,
+  getClientSize,
   // findY,
   // findX,
   getCursor,

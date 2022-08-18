@@ -10,6 +10,7 @@ import Header from '../Header/Header';
 import Snackbar from './Snackbar';
 import ContextMenu from './ContextMenu';
 import Target from './Target';
+import TargetFound from './TargetFound';
 import Image from './Image';
 
 import * as cursorOffset from '../../helpers/cursorOffset';
@@ -47,9 +48,8 @@ const Main = ({ children, props }) => {
   };
 
   const handleMenuClick = async (id) => {
-    const characterCoord = await firebase.getTarget(id, level);
+    const characterCoord = await firebase.getTargetCharacter(id, level);
     const result = checkGame.isInRange(cursor, characterCoord);
-
     if (result) {
       const foundName = characters.find((char) => char.id === id).name;
       const updatedCharacters = characters.map((char) => {
@@ -57,6 +57,8 @@ const Main = ({ children, props }) => {
           return {
             ...char,
             found: true,
+            x: characterCoord.x,
+            y: characterCoord.y,
           };
         }
 
@@ -154,6 +156,10 @@ const Main = ({ children, props }) => {
           ref={mainRef}
         >
           {isActive ? <Target target={target} /> : null}
+          <TargetFound
+            characters={characters}
+            // offset={mainRef.current.offsetHeight}
+          />
           <Image level={level} />
         </EventWrapper>
       </GameWrapper>
@@ -180,7 +186,7 @@ const GameWrapper = styled.div`
 
 const EventWrapper = styled.div`
   display: flex;
-  cursor: url('${(props) => props.customCursor}') 32 32, auto; ;
+  cursor: url('${(props) => props.customCursor}') 32 32, auto;
 `;
 
 export default Main;

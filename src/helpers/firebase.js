@@ -1,11 +1,14 @@
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/firebase-config';
 
-const getTarget = async (id, level) => {
-  const targetDoc = doc(db, 'target', level);
-  const characters = await getDoc(targetDoc);
-
-  return characters.exists() ? characters.data()[id] : console.log('Whoops!');
+const getCharacters = async (level) => {
+  const targetLevel = doc(db, 'target', level);
+  const characters = await getDoc(targetLevel);
+  return characters;
 };
 
-export { getTarget };
+const getTargetCharacter = async (id, level) => {
+  const characters = await getCharacters(level);
+  return characters.exists() ? characters.data()[id] : console.log('Whoops!');
+};
+export { getTargetCharacter, getCharacters };

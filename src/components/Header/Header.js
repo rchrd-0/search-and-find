@@ -23,6 +23,7 @@ Header.propTypes = {
       id: PropTypes.string,
       name: PropTypes.string,
       img: PropTypes.string,
+      found: PropTypes.bool,
     })
   ),
 };

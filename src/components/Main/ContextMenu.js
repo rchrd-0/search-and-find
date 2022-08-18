@@ -7,7 +7,6 @@ import importAll from '../../helpers/importAll';
 const ContextMenu = (props) => {
   const { menu, characters, handleClick } = props;
   const remainingChars = characters.filter((char) => !char.found);
-
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
   );
@@ -45,6 +44,7 @@ ContextMenu.propTypes = {
       id: PropTypes.string,
       name: PropTypes.string,
       img: PropTypes.string,
+      found: PropTypes.bool,
     })
   ),
   handleClick: PropTypes.func,
@@ -65,6 +65,7 @@ const StyledContext = styled.div`
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
   cursor: pointer;
+  z-index: 2;
 `;
 
 const List = styled.ul`
