@@ -5,15 +5,11 @@ import PropTypes from 'prop-types';
 import importAll from '../../helpers/importAll';
 
 const ContextMenu = (props) => {
-  const { menu, charList } = props;
+  const { menu, charList, handleClick } = props;
 
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
   );
-
-  const handleClick = (id) => {
-    console.log(id);
-  };
 
   return (
     <StyledContext xAxis={menu.x} yAxis={menu.y} leftRight={menu.leftRight}>
@@ -45,6 +41,7 @@ ContextMenu.propTypes = {
       img: PropTypes.string,
     })
   ),
+  handleClick: PropTypes.func,
 };
 
 const StyledContext = styled.div`

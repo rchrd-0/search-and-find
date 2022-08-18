@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/firebase-config';
+import * as firebase from '../../helpers/firebase';
 
 import ContextMenu from './ContextMenu';
 import Target from './Target';
@@ -15,16 +16,17 @@ import charManifest from '../../assets/imageCharManifest';
 
 const Main = (props) => {
   const [level, setLevel] = useState('snes');
+  const [levelManifest, setLevelManifest] = useState({});
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, leftRight: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [isActive, setIsActive] = useState(false);
 
-  const levelManifest = charManifest.find((obj) => obj.id === level);
-
   const mainRef = useRef();
 
-  const handleClick = (e) => {
+  const toggleContext = () => setIsActive(!isActive);
+
+  const handleMainClick = (e) => {
     const { pageX, pageY } = e;
 
     setCursor({
@@ -33,6 +35,19 @@ const Main = (props) => {
     });
   };
 
+  const handleMenuClick = async (id) => {
+    const characterCoord = await firebase.getTarget(id, level);
+    console.log(characterCoord);
+    setIsActive(false);
+  };
+
+  // Sets level manifest to correct object on mount
+  useEffect(() => {
+    const thisLevel = charManifest.find((obj) => obj.id === level);
+    setLevelManifest(thisLevel);
+  }, []);
+
+  // Determines target & context menu placement on cursor state change
   useEffect(() => {
     setMenu({
       x: cursor.x * 100,
@@ -51,19 +66,20 @@ const Main = (props) => {
     setIsActive((prevState) => !prevState);
   }, [cursor]);
 
-  // const foo = async () => {
-  //   const docRef = doc(db, 'target', level);
-  //   const docSnap = await getDoc(docRef);
-  //   const bar = docSnap.data();
-  //   console.log(bar['chrono-trigger']);
-  // };
-
   return (
     <StyledMain>
       {isActive ? (
-        <ContextMenu menu={menu} charList={levelManifest.charList} />
+        <ContextMenu
+          menu={menu}
+          charList={levelManifest.charList}
+          handleClick={handleMenuClick}
+        />
       ) : null}
-      <EventWrapper customCursor={cursor64} onClick={handleClick} ref={mainRef}>
+      <EventWrapper
+        customCursor={cursor64}
+        onClick={handleMainClick}
+        ref={mainRef}
+      >
         {isActive ? <Target target={target} /> : null}
         <Image level={level} />
       </EventWrapper>

@@ -4,22 +4,22 @@ const charManifest = [
     img: 'snes-invis',
     charList: [
       {
-        id: 'donkey-kong',
+        id: 'dkong',
         name: 'Donkey Kong',
         img: 'snes-dk',
       },
       {
-        id: 'chrono-trigger',
+        id: 'chrono',
         name: 'Chrono',
         img: 'snes-chrono',
       },
       {
-        id: 'link-to-past',
+        id: 'pinklink',
         name: 'Link',
         img: 'snes-link',
       },
       {
-        id: 'super-metroid',
+        id: 'metroid',
         name: 'Samus',
         img: 'snes-samus',
       },
