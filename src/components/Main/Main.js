@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
-
-import { db } from '../../firebase/firebase-config';
 import * as firebase from '../../helpers/firebase';
 
 import Header from '../Header/Header';
@@ -24,8 +21,7 @@ const Main = ({ children, props }) => {
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
-  const [isActive, setIsActive] = useState(false);
-  const [snackbarHidden, setSnackbarHidden] = useState(true);
+  const [contextActive, setContextActive] = useState(false);
   const [snackbarActive, setSnackbarActive] = useState(false);
   const [snackbar, setSnackbar] = useState({
     char: '',
@@ -67,18 +63,13 @@ const Main = ({ children, props }) => {
 
       setCharacters(updatedCharacters);
 
-      setSnackbar((prevState) => ({
-        char: foundName,
-        success: true,
-      }));
+      setSnackbar({ char: foundName, success: true });
     } else {
-      setSnackbar((prevState) => ({
-        char: '',
-        success: false,
-      }));
+      setSnackbar({ char: '', success: false });
     }
-    setSnackbarHidden(false);
-    setIsActive(false);
+
+    setSnackbarActive(true);
+    setContextActive(false);
   };
 
   // Sets level manifest to correct object on mount
@@ -103,47 +94,26 @@ const Main = ({ children, props }) => {
       y: cursor.y * 100 - relativeToHeader,
     });
 
-    setIsActive((prevState) => !prevState);
+    setContextActive((prevState) => !prevState);
   }, [cursor]);
 
+  // Snackbar fades out after 2.5s
   useEffect(() => {
-    if (!snackbarHidden) {
-      const appear = setTimeout(() => {
-        setSnackbarActive(true);
+    if (snackbarActive) {
+      const timeout = setTimeout(() => {
+        setSnackbarActive(false);
+      }, 2500);
 
-        const disappear = setTimeout(() => {
-          setSnackbarActive(false);
-
-          const hide = setTimeout(() => {
-            setSnackbarHidden(true);
-          }, 100);
-
-          return () => {
-            clearTimeout(hide);
-          };
-        }, 2500);
-
-        return () => {
-          clearTimeout(disappear);
-        };
-      }, 100);
-
-      return () => {
-        clearTimeout(appear);
-      };
+      return () => clearTimeout(timeout);
     }
-  }, [snackbarHidden]);
+  });
 
   return (
     <StyledMain>
       <Header characters={characters} />
-      <Snackbar
-        content={snackbar}
-        active={snackbarActive}
-        visible={snackbarHidden}
-      />
+      <Snackbar content={snackbar} active={snackbarActive} />
       <GameWrapper>
-        {isActive ? (
+        {contextActive ? (
           <ContextMenu
             menu={menu}
             characters={characters}
@@ -155,11 +125,8 @@ const Main = ({ children, props }) => {
           onClick={handleMainClick}
           ref={mainRef}
         >
-          {isActive ? <Target target={target} /> : null}
-          <TargetFound
-            characters={characters}
-            // offset={mainRef.current.offsetHeight}
-          />
+          {contextActive ? <Target target={target} /> : null}
+          <TargetFound characters={characters} />
           <Image level={level} />
         </EventWrapper>
       </GameWrapper>
