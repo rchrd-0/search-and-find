@@ -17,6 +17,8 @@ import charManifest from '../../assets/imageCharManifest';
 import * as checkGame from '../../helpers/checkGame';
 
 const Main = ({ children, props }) => {
+  const [gameOver, setGameOver] = useState(false);
+  const [time, setTime] = useState(0);
   const [level, setLevel] = useState('snes');
   const [characters, setCharacters] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -82,6 +84,16 @@ const Main = ({ children, props }) => {
     setCharacters(thisLevel.charList.map((obj) => ({ ...obj, found: false })));
   }, []);
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime((prevState) => prevState + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [gameOver]);
+
   // Determines target & context menu placement on cursor state change
   useEffect(() => {
     const { offsetWidth, offsetHeight } = mainRef.current;
@@ -118,6 +130,7 @@ const Main = ({ children, props }) => {
         characters={characters}
         toggleDropdown={toggleDropdown}
         dropdown={dropdown}
+        time={time}
       />
       <Dropdown characters={characters} active={dropdown} />
       <Snackbar content={snackbar} active={snackbarActive} />
