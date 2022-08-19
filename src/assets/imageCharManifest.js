@@ -1,7 +1,8 @@
 const charManifest = [
   {
     id: 'snes',
-    img: 'snes-invis',
+    img: 'snes',
+    name: 'SNES (Super Famicom)',
     charList: [
       {
         id: 'dkong',

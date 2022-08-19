@@ -58,7 +58,7 @@ const StyledHeader = styled.header`
 const Heading = styled.h1`
   font-style: italic;
   font-weight: 600;
-  color: #df0024;
+  color: ${(props) => props.theme.color.psRed};
 `;
 
 const Accent = styled.span`

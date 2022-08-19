@@ -16,9 +16,10 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 import charManifest from '../../assets/imageCharManifest';
 import * as checkGame from '../../helpers/checkGame';
 
-const Main = ({ children, props }) => {
-  const [gameOver, setGameOver] = useState(false);
-  const [level, setLevel] = useState('snes');
+const Main = (props) => {
+  const { gameStart, level } = props;
+
+  const [gameOver, setGameOver] = useState(true);
   const [characters, setCharacters] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
@@ -34,6 +35,11 @@ const Main = ({ children, props }) => {
   const mainRef = useRef();
 
   const [time, setTime] = useState(0);
+
+  // Handle game start
+  useEffect(() => {
+    if (gameStart) setGameOver(false);
+  }, [gameStart]);
 
   useEffect(() => {
     if (!gameOver) {
@@ -127,6 +133,14 @@ const Main = ({ children, props }) => {
     }
   }, [snackbar, snackbarActive]);
 
+  // useEffect(() => {
+  //   const charactersRemaining = characters.filter((char) => !char.found).length;
+  //   if (charactersRemaining === 0) {
+  //     setGameOver(true);
+  //   }
+  //   // console.log(charactersRemaining);
+  // }, [characters]);
+
   return (
     <StyledMain>
       <Header
@@ -161,6 +175,8 @@ const Main = ({ children, props }) => {
 };
 
 Main.propTypes = {
+  gameStart: PropTypes.bool,
+  level: PropTypes.string,
   // offset: PropTypes.shape({
   //   x: PropTypes.number,
   //   y: PropTypes.number,
