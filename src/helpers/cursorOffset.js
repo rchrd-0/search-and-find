@@ -10,7 +10,7 @@ const getClientSize = () => {
 // const findX = () => Math.ceil(document.body.clientWidth * 0.025);
 
 const appOffsets = {
-  contextMenuWidth: 200,
+  contextMenuWidth: 180,
   headerHeight: 60,
   cursorSizeHalf: 64 / 2,
   targetMenuGap: 16,

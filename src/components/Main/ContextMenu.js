@@ -51,7 +51,7 @@ ContextMenu.propTypes = {
 };
 
 const StyledContext = styled.div`
-  width: 200px;
+  width: 180px;
   position: absolute;
   top: ${(props) => props.menu.y}%;
   left: ${(props) => props.menu.x}%;
@@ -70,18 +70,17 @@ const StyledContext = styled.div`
 
 const List = styled.ul`
   flex: 1;
-  list-style-type: none;
   color: white;
   border-radius: 8px;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 `;
 
 const ListItem = styled.li`
   display: flex;
-  padding: 12px 16px 12px 58px;
+  padding: 8px 12px 8px 54px;
   border-bottom: 1px solid white;
   background-image: url('${(props) => props.img}');
-  background-size: 32px;
+  background-size: 24px;
   background-position: 16px center;
   background-repeat: no-repeat;
 

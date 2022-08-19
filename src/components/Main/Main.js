@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import * as firebase from '../../helpers/firebase';
 
 import Header from '../Header/Header';
+import Dropdown from '../Header/Dropdown';
 import Snackbar from './Snackbar';
 import ContextMenu from './ContextMenu';
 import Target from './Target';
@@ -111,6 +112,7 @@ const Main = ({ children, props }) => {
   return (
     <StyledMain>
       <Header characters={characters} />
+      <Dropdown characters={characters} />
       <Snackbar content={snackbar} active={snackbarActive} />
       <GameWrapper>
         {contextActive ? (
