@@ -6,7 +6,7 @@ import Timer from './Timer';
 import minimize from '../../assets/icons/minimize.svg';
 
 const Header = (props) => {
-  const { characters, toggleDropdown, dropdown, time } = props;
+  const { characters, toggleDropdown, dropdown, gameOver } = props;
 
   const charactersRemaining = characters.filter(
     (character) => !character.found
@@ -15,7 +15,7 @@ const Header = (props) => {
   return (
     <StyledHeader>
       RetroSearch
-      <Timer time={time} />
+      <Timer gameOver={gameOver} />
       <NotiBubble onClick={toggleDropdown}>
         {!dropdown ? `${charactersRemaining}` : null}
         <Minimize active={dropdown} src={minimize} />
@@ -35,7 +35,7 @@ Header.propTypes = {
   ),
   toggleDropdown: PropTypes.func,
   dropdown: PropTypes.bool,
-  time: PropTypes.number,
+  gameOver: PropTypes.bool,
 };
 
 const StyledHeader = styled.header`
