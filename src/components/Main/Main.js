@@ -28,6 +28,7 @@ const Main = ({ children, props }) => {
     char: '',
     success: false,
   });
+  const [dropdown, setDropdown] = useState(false);
 
   const mainRef = useRef();
 
@@ -44,7 +45,7 @@ const Main = ({ children, props }) => {
     });
   };
 
-  const handleMenuClick = async (id) => {
+  const handleContextMenuClick = async (id) => {
     const characterCoord = await firebase.getTargetCharacter(id, level);
     const result = checkGame.isInRange(cursor, characterCoord);
     if (result) {
@@ -72,6 +73,8 @@ const Main = ({ children, props }) => {
     setSnackbarActive(true);
     setContextActive(false);
   };
+
+  const toggleDropdown = () => setDropdown((prevState) => !prevState);
 
   // Sets level manifest to correct object on mount
   useEffect(() => {
@@ -111,15 +114,19 @@ const Main = ({ children, props }) => {
 
   return (
     <StyledMain>
-      <Header characters={characters} />
-      <Dropdown characters={characters} />
+      <Header
+        characters={characters}
+        toggleDropdown={toggleDropdown}
+        dropdown={dropdown}
+      />
+      <Dropdown characters={characters} active={dropdown} />
       <Snackbar content={snackbar} active={snackbarActive} />
       <GameWrapper>
         {contextActive ? (
           <ContextMenu
             menu={menu}
             characters={characters}
-            handleClick={handleMenuClick}
+            handleClick={handleContextMenuClick}
           />
         ) : null}
         <EventWrapper

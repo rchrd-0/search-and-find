@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import importAll from '../../helpers/importAll';
 
 const Dropdown = (props) => {
-  const { characters } = props;
+  const { characters, active } = props;
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
   );
   return (
-    <DropdownMenu>
+    <DropdownMenu active={active}>
       {characters.map((item) => (
         <Character key={item.id} found={item.found}>
           <Image img={imgs[`${item.img}.png`]} found={item.found} />
@@ -30,6 +30,7 @@ Dropdown.propTypes = {
       found: PropTypes.bool,
     })
   ),
+  active: PropTypes.bool,
 };
 
 const DropdownMenu = styled.ul`
@@ -45,6 +46,9 @@ const DropdownMenu = styled.ul`
   flex-direction: column;
   gap: 12px;
   padding: 12px 18px;
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 `;
 
 const Image = styled.img`

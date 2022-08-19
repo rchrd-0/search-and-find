@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import minimize from '../../assets/icons/minimize.svg';
+
 const Header = (props) => {
-  const { characters } = props;
+  const { characters, toggleDropdown, dropdown } = props;
 
   const charactersRemaining = characters.filter(
     (character) => !character.found
@@ -12,7 +14,10 @@ const Header = (props) => {
   return (
     <StyledHeader>
       RetroSearch
-      <NotiBubble>{charactersRemaining}</NotiBubble>
+      <NotiBubble onClick={toggleDropdown}>
+        {!dropdown ? `${charactersRemaining}` : null}
+        <Minimize active={dropdown} src={minimize} />
+      </NotiBubble>
     </StyledHeader>
   );
 };
@@ -26,6 +31,8 @@ Header.propTypes = {
       found: PropTypes.bool,
     })
   ),
+  toggleDropdown: PropTypes.func,
+  dropdown: PropTypes.bool,
 };
 
 const StyledHeader = styled.header`
@@ -51,6 +58,17 @@ const NotiBubble = styled.div`
   height: 40px;
   border-radius: 8px;
   background-color: navajowhite;
+  cursor: pointer;
+  /* background-image: url(${(props) => props.src});
+  background-size: 28px;
+  background-repeat: no-repeat;
+  background-position: center; */
+`;
+
+const Minimize = styled.img`
+  width: 28px;
+  content: url(${(props) => props.src});
+  display: ${(props) => (props.active ? 'default' : 'none')};
 `;
 
 export default Header;
