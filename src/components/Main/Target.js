@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import target64 from '../../assets/icons/target64.svg';
-import cursor64 from '../../assets/icons/cursor64.svg';
 
 const Target = (props) => {
   const { target } = props;

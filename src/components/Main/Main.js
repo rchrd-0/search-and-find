@@ -33,6 +33,20 @@ const Main = ({ children, props }) => {
 
   const mainRef = useRef();
 
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    if (!gameOver) {
+      const timer = setInterval(() => {
+        setTime((prevState) => prevState + 1);
+      }, 1000);
+
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [gameOver]);
+
   const handleMainClick = (e) => {
     const { pageX, pageY } = e;
     // console.log(
@@ -106,12 +120,12 @@ const Main = ({ children, props }) => {
   useEffect(() => {
     if (snackbarActive) {
       const timeout = setTimeout(() => {
-        setSnackbarActive((prevState) => !prevState);
+        setSnackbarActive(false);
       }, 2500);
 
       return () => clearTimeout(timeout);
     }
-  });
+  }, [snackbar, snackbarActive]);
 
   return (
     <StyledMain>
@@ -120,6 +134,7 @@ const Main = ({ children, props }) => {
         toggleDropdown={toggleDropdown}
         dropdown={dropdown}
         gameOver={gameOver}
+        time={time}
       />
       <Dropdown characters={characters} active={dropdown} />
       <Snackbar content={snackbar} active={snackbarActive} />

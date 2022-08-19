@@ -6,7 +6,7 @@ import Timer from './Timer';
 import minimize from '../../assets/icons/minimize.svg';
 
 const Header = (props) => {
-  const { characters, toggleDropdown, dropdown, gameOver } = props;
+  const { characters, toggleDropdown, dropdown, time } = props;
 
   const charactersRemaining = characters.filter(
     (character) => !character.found
@@ -14,8 +14,10 @@ const Header = (props) => {
 
   return (
     <StyledHeader>
-      RetroSearch
-      <Timer gameOver={gameOver} />
+      <Heading>
+        Retro<Accent>Search</Accent>
+      </Heading>
+      <Timer time={time} />
       <NotiBubble onClick={toggleDropdown}>
         {!dropdown ? `${charactersRemaining}` : null}
         <Minimize active={dropdown} src={minimize} />
@@ -35,7 +37,7 @@ Header.propTypes = {
   ),
   toggleDropdown: PropTypes.func,
   dropdown: PropTypes.bool,
-  gameOver: PropTypes.bool,
+  time: PropTypes.number,
 };
 
 const StyledHeader = styled.header`
@@ -49,8 +51,19 @@ const StyledHeader = styled.header`
   font-size: 1.8rem;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  background-color: lavender;
+  background-color: ${(props) => props.theme.color.gray};
   z-index: 2;
+`;
+
+const Heading = styled.h1`
+  font-style: italic;
+  font-weight: 600;
+  color: #df0024;
+`;
+
+const Accent = styled.span`
+  color: #05ac9f;
+  font-weight: 400;
 `;
 
 const NotiBubble = styled.div`
@@ -60,12 +73,9 @@ const NotiBubble = styled.div`
   flex: 0 0 40px;
   height: 40px;
   border-radius: 8px;
-  background-color: navajowhite;
   cursor: pointer;
-  /* background-image: url(${(props) => props.src});
-  background-size: 28px;
-  background-repeat: no-repeat;
-  background-position: center; */
+  color: #f2c300;
+  background-color: #2e6db4;
 `;
 
 const Minimize = styled.img`

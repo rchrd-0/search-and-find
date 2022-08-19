@@ -22,7 +22,7 @@ Snackbar.propTypes = {
 const StyledSnack = styled.div`
   color: white;
   position: fixed;
-  top: calc(60px + 5%);
+  top: calc(60px + 3%);
   left: 50%;
   transform: translate(-50%);
   display: flex;
