@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Main from './components/Main/Main';
 import Start from './components/Start/Start';
-import importAll from './helpers/importAll';
-import * as cursorOffset from './helpers/cursorOffset';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
 import Theme from './assets/styles/Theme';
@@ -31,7 +28,7 @@ const App = () => {
           {menuActive ? (
             <Start level={level} handleGameStart={handleGameStart} />
           ) : null}
-          <Main gameStart={gameStart} level={level} />
+          {gameStart ? <Main gameStart={gameStart} level={level} /> : null}
         </AppWrapper>
       </Theme>
     </>

@@ -40,7 +40,7 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 5;
-  background-color: rgba(61, 61, 61, 0.95);
+  background-color: rgba(61, 61, 61, 1);
 `;
 
 const Wrapper = styled.div`

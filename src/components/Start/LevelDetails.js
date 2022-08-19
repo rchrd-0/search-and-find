@@ -37,7 +37,7 @@ const LevelDetails = (props) => {
 
 LevelDetails.propTypes = {
   level: PropTypes.string,
-  handleGameStart: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 const Details = styled.div`
