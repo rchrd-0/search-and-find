@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 const theme = {
   color: {
     psRed: '#df0024',
+    softRed: '#FF4766',
     psYellow: '#f2c300',
     psGreen: '#05ac9f',
     psBlue: '#2e6db4',

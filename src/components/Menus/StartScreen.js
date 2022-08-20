@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import * as Menu from '../Styled/Menu';
+import MenuFlex from './MenuFlex';
 import LevelDetails from './LevelDetails';
 import importAll from '../../helpers/importAll';
 
-const Start = (props) => {
+const StartScreen = (props) => {
   const { level, handleGameStart } = props;
 
   const imgs = importAll(
@@ -13,64 +15,41 @@ const Start = (props) => {
   );
 
   return (
-    <Layout>
-      <Wrapper>
+    <StartPage background={imgs['background.svg']}>
+      <MenuFlex>
         <Heading>
           Retro<Accent>Search</Accent>
         </Heading>
-        <Menu>
+        <Menu.Container>
           <Preview src={imgs[`${level}.png`]} />
           <LevelDetails level={level} onClick={handleGameStart} />
-        </Menu>
-      </Wrapper>
-    </Layout>
+        </Menu.Container>
+      </MenuFlex>
+    </StartPage>
   );
 };
 
-Start.propTypes = {
+StartScreen.propTypes = {
   level: PropTypes.string,
   handleGameStart: PropTypes.func,
 };
 
-const Layout = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 5;
-  background-color: rgba(61, 61, 61, 1);
+const StartPage = styled(Menu.Page)`
+  background-image: url(${(props) => props.background});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 10%;
-  align-items: center;
-  gap: 20px;
-`;
-
-const Heading = styled.h1`
-  font-size: 2.4rem;
-  font-weight: 600;
+const Heading = styled(Menu.Header)`
+  color: ${(props) => props.theme.color.softRed};
   font-style: italic;
-  color: ${(props) => props.theme.color.psRed};
-  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
-    0px 18px 23px rgba(0, 0, 0, 0.1);
+  align-self: center;
 `;
 
 const Accent = styled.span`
   font-weight: 400;
   color: ${(props) => props.theme.color.psGreen};
-`;
-
-const Menu = styled.div`
-  display: flex;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 `;
 
 const Preview = styled.div`
@@ -84,4 +63,5 @@ const Preview = styled.div`
   /* background-color: ${(props) => props.theme.color.gray}; */
   background-color: white;
 `;
-export default Start;
+
+export default StartScreen;

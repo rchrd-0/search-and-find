@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Button from '../elements/Button';
+import Button from '../Styled/Button';
 import importAll from '../../helpers/importAll';
 import charManifest from '../../assets/imageCharManifest';
 

@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import StartScreen from './components/Menus/StartScreen';
 import Main from './components/Main/Main';
-import Start from './components/Start/Start';
+import EndScreen from './components/Menus/EndScreen';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
 import Theme from './assets/styles/Theme';
 import charManifest from './assets/imageCharManifest';
 import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
-import { render } from '@testing-library/react';
 
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
@@ -63,19 +63,20 @@ const App = () => {
 
   const renderContent = () => {
     if (!gameStart && !gameOver) {
-      return <Start level={level} handleGameStart={handleGameStart} />;
+      return <StartScreen level={level} handleGameStart={handleGameStart} />;
     }
 
     if (gameStart) {
       return (
-        <Main
-          gameStart={gameStart}
-          level={level}
-          characters={characters}
-          charsRemaining={charsRemaining}
-          handleTargetFound={handleTargetFound}
-          time={time}
-        />
+        <EndScreen time={time} level={level} />
+        // <Main
+        //   gameStart={gameStart}
+        //   level={level}
+        //   characters={characters}
+        //   charsRemaining={charsRemaining}
+        //   handleTargetFound={handleTargetFound}
+        //   time={time}
+        // />
       );
     }
   };

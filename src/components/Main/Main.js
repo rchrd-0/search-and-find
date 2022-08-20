@@ -17,6 +17,7 @@ import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
   const { level, characters, charsRemaining, handleTargetFound, time } = props;
+
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
@@ -113,7 +114,6 @@ const Main = (props) => {
         charsRemaining={charsRemaining}
         toggleDropdown={toggleDropdown}
         dropdown={dropdown}
-        // gameOver={gameOver}
         time={time}
       />
       <Dropdown characters={characters} active={dropdown} />
@@ -141,7 +141,6 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  gameStart: PropTypes.bool,
   level: PropTypes.string,
   characters: PropTypes.arrayOf(
     PropTypes.shape({
