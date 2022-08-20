@@ -44,10 +44,10 @@ const Main = (props) => {
   const handleMainClick = (e) => {
     const { pageX, pageY } = e;
 
-    // console.log(
-    //   pageX / mainRef.current.offsetWidth,
-    //   pageY / mainRef.current.offsetHeight
-    // );
+    console.log(
+      pageX / mainRef.current.offsetWidth,
+      pageY / mainRef.current.offsetHeight
+    );
 
     setCursor({
       x: pageX / mainRef.current.offsetWidth,

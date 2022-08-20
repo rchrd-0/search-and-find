@@ -14,7 +14,7 @@ const App = () => {
   const [gameStart, setGameStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [time, setTime] = useState({ start: 0, end: 0 });
-  const [level, setLevel] = useState('snes');
+  const [level, setLevel] = useState('dreamcast');
   const [characters, setCharacters] = useState([]);
   const [charsRemaining, setCharsRemaining] = useState(5);
 

@@ -15,7 +15,6 @@ const EndScreen = (props) => {
   const levelManifest = charManifest.find((obj) => obj.id === level);
 
   const inSeconds = differenceInSeconds(time.end, time.start);
-  const finalTime = formatTime(inSeconds);
 
   return (
     <EndPage>
@@ -27,8 +26,9 @@ const EndScreen = (props) => {
             <Heading>Results</Heading>
             <Time>
               <Subhead>Your time</Subhead>
-              <Text>{finalTime}</Text>
+              <Text>{formatTime(inSeconds)}</Text>
             </Time>
+            <NameInput />
             <Button onClick={handleGameRestart}>Play again</Button>
           </GameScore>
         </Menu.Container>
@@ -53,6 +53,7 @@ const EndPage = styled(Menu.Page)`
 
 const Header = styled(Menu.Header)`
   color: white;
+  align-self: center;
 `;
 
 const GameScore = styled.div`
@@ -85,6 +86,13 @@ const Time = styled.div`
   flex: 1;
   align-items: center;
   padding: 0 40px;
+`;
+
+const NameInput = styled.input.attrs({
+  type: 'text',
+  maxLength: '3',
+})`
+  width: 100px;
 `;
 
 const Leaderboard = styled.div`
