@@ -16,14 +16,7 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
-  const {
-    gameStart,
-    level,
-    characters,
-    charsRemaining,
-    handleTargetFound,
-    time,
-  } = props;
+  const { level, characters, charsRemaining, handleTargetFound, time } = props;
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });

@@ -9,6 +9,7 @@ import Theme from './assets/styles/Theme';
 import charManifest from './assets/imageCharManifest';
 import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
+import { render } from '@testing-library/react';
 
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
@@ -60,12 +61,32 @@ const App = () => {
     }
   }, [gameStart, charsRemaining]);
 
+  const renderContent = () => {
+    if (!gameStart && !gameOver) {
+      return <Start level={level} handleGameStart={handleGameStart} />;
+    }
+
+    if (gameStart) {
+      return (
+        <Main
+          gameStart={gameStart}
+          level={level}
+          characters={characters}
+          charsRemaining={charsRemaining}
+          handleTargetFound={handleTargetFound}
+          time={time}
+        />
+      );
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
       <Theme>
         <AppWrapper>
-          {!gameStart && !gameOver ? (
+          {renderContent()}
+          {/* {!gameStart && !gameOver ? (
             <Start level={level} handleGameStart={handleGameStart} />
           ) : null}
           {gameStart ? (
@@ -77,7 +98,7 @@ const App = () => {
               handleTargetFound={handleTargetFound}
               time={time}
             />
-          ) : null}
+          ) : null} */}
         </AppWrapper>
       </Theme>
     </>
