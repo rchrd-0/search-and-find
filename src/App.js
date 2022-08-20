@@ -17,6 +17,7 @@ const App = () => {
   const [level, setLevel] = useState('snes');
 
   const [characters, setCharacters] = useState([]);
+  const [charsRemaining, setCharsRemaining] = useState(0);
 
   const handleGameStart = () => {
     setGameStart(true);
@@ -35,6 +36,12 @@ const App = () => {
     }
   }, [gameStart, level]);
 
+  // Updates charRemaining state dependent on character state changes
+  useEffect(() => {
+    const remaining = characters.filter((chars) => !chars.found).length;
+    setCharsRemaining(remaining);
+  }, [characters]);
+
   return (
     <>
       <GlobalStyle />
@@ -48,6 +55,7 @@ const App = () => {
               gameStart={gameStart}
               level={level}
               characters={characters}
+              charsRemaining={charsRemaining}
               handleTargetFound={handleTargetFound}
             />
           ) : null}

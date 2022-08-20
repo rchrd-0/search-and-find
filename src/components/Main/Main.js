@@ -16,7 +16,8 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
-  const { gameStart, level, characters, handleTargetFound } = props;
+  const { gameStart, level, characters, charsRemaining, handleTargetFound } =
+    props;
   const [gameOver, setGameOver] = useState(true);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
@@ -130,13 +131,14 @@ const Main = (props) => {
   //   if (charactersRemaining === 0) {
   //     setGameOver(true);
   //   }
-  //   // console.log(charactersRemaining);
+  //   console.log(charactersRemaining);
   // }, [characters]);
 
   return (
     <StyledMain>
       <Header
         characters={characters}
+        charsRemaining={charsRemaining}
         toggleDropdown={toggleDropdown}
         dropdown={dropdown}
         gameOver={gameOver}
@@ -177,6 +179,7 @@ Main.propTypes = {
       found: PropTypes.bool,
     })
   ),
+  charsRemaining: PropTypes.number,
   handleTargetFound: PropTypes.func,
   // offset: PropTypes.shape({
   //   x: PropTypes.number,

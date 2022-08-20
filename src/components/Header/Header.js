@@ -6,11 +6,7 @@ import Timer from './Timer';
 import minimize from '../../assets/icons/minimize.svg';
 
 const Header = (props) => {
-  const { characters, toggleDropdown, dropdown, time } = props;
-
-  const charactersRemaining = characters.filter(
-    (character) => !character.found
-  ).length;
+  const { charsRemaining, toggleDropdown, dropdown, time } = props;
 
   return (
     <StyledHeader>
@@ -19,7 +15,7 @@ const Header = (props) => {
       </Heading>
       <Timer time={time} />
       <NotiBubble onClick={toggleDropdown}>
-        {!dropdown ? `${charactersRemaining}` : null}
+        {!dropdown ? `${charsRemaining}` : null}
         <Minimize active={dropdown} src={minimize} />
       </NotiBubble>
     </StyledHeader>
@@ -27,14 +23,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  characters: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      img: PropTypes.string,
-      found: PropTypes.bool,
-    })
-  ),
+  charsRemaining: PropTypes.number,
   toggleDropdown: PropTypes.func,
   dropdown: PropTypes.bool,
   time: PropTypes.number,
