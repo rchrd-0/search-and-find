@@ -6,14 +6,15 @@ import Timer from './Timer';
 import minimize from '../../assets/icons/minimize.svg';
 
 const Header = (props) => {
-  const { charsRemaining, toggleDropdown, dropdown, time } = props;
+  const { charsRemaining, toggleDropdown, dropdown, gameStart, gameOver } =
+    props;
 
   return (
     <StyledHeader>
       <Heading>
         Retro<Accent>Search</Accent>
       </Heading>
-      <Timer time={time} />
+      <Timer gameStart={gameStart} gameOver={gameOver} />
       <NotiBubble onClick={toggleDropdown}>
         {!dropdown ? `${charsRemaining}` : null}
         <Minimize active={dropdown} src={minimize} />
@@ -26,7 +27,8 @@ Header.propTypes = {
   charsRemaining: PropTypes.number,
   toggleDropdown: PropTypes.func,
   dropdown: PropTypes.bool,
-  time: PropTypes.number,
+  gameStart: PropTypes.bool,
+  gameOver: PropTypes.bool,
 };
 
 const StyledHeader = styled.header`

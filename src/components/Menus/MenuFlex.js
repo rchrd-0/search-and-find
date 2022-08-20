@@ -16,6 +16,7 @@ const FlexWrapper = styled.div`
   position: fixed;
   top: 10%;
   gap: 16px;
+  user-select: none;
 `;
 
 export default MenuFlex;

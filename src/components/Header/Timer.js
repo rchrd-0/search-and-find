@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import formatTime from '../../helpers/formatTime';
 
 const Timer = (props) => {
-  const { time } = props;
+  const { gameStart, gameOver } = props;
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    if (gameStart && !gameOver) {
+      const timer = setInterval(() => {
+        setTime((prevState) => prevState + 1);
+      }, 1000);
+
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [gameStart, gameOver]);
 
   return <StyledTimer>{formatTime(time)}</StyledTimer>;
 };
 
 Timer.propTypes = {
-  time: PropTypes.number,
+  gameOver: PropTypes.bool,
+  gameStart: PropTypes.bool,
 };
 
 const StyledTimer = styled.div`

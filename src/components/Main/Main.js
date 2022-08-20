@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import * as firebase from '../../helpers/firebase';
 
+import EndScreen from '../Menus/EndScreen';
 import Header from '../Header/Header';
 import Dropdown from '../Header/Dropdown';
 import Snackbar from './Snackbar';
@@ -16,7 +17,16 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
-  const { level, characters, charsRemaining, handleTargetFound, time } = props;
+  const {
+    level,
+    characters,
+    charsRemaining,
+    handleTargetFound,
+    handleGameRestart,
+    gameStart,
+    gameOver,
+    time,
+  } = props;
 
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
@@ -108,35 +118,45 @@ const Main = (props) => {
   }, [snackbar, snackbarActive]);
 
   return (
-    <StyledMain>
-      <Header
-        characters={characters}
-        charsRemaining={charsRemaining}
-        toggleDropdown={toggleDropdown}
-        dropdown={dropdown}
-        time={time}
-      />
-      <Dropdown characters={characters} active={dropdown} />
-      <Snackbar content={snackbar} active={snackbarActive} />
-      <GameWrapper>
-        {contextActive ? (
-          <ContextMenu
-            menu={menu}
-            characters={characters}
-            handleClick={handleContextMenuClick}
-          />
-        ) : null}
-        <EventWrapper
-          customCursor={cursor64}
-          onClick={handleMainClick}
-          ref={mainRef}
-        >
-          {contextActive ? <Target target={target} /> : null}
-          <TargetFound characters={characters} />
-          <Image level={level} />
-        </EventWrapper>
-      </GameWrapper>
-    </StyledMain>
+    <>
+      {gameOver ? (
+        <EndScreen
+          time={time}
+          level={level}
+          handleGameRestart={handleGameRestart}
+        />
+      ) : null}
+      <StyledMain>
+        <Header
+          characters={characters}
+          charsRemaining={charsRemaining}
+          toggleDropdown={toggleDropdown}
+          dropdown={dropdown}
+          gameStart={gameStart}
+          gameOver={gameOver}
+        />
+        <Dropdown characters={characters} active={dropdown} />
+        <Snackbar content={snackbar} active={snackbarActive} />
+        <GameWrapper>
+          {contextActive ? (
+            <ContextMenu
+              menu={menu}
+              characters={characters}
+              handleClick={handleContextMenuClick}
+            />
+          ) : null}
+          <EventWrapper
+            customCursor={cursor64}
+            onClick={handleMainClick}
+            ref={mainRef}
+          >
+            {contextActive ? <Target target={target} /> : null}
+            <TargetFound characters={characters} />
+            <Image level={level} />
+          </EventWrapper>
+        </GameWrapper>
+      </StyledMain>
+    </>
   );
 };
 
@@ -152,12 +172,19 @@ Main.propTypes = {
   ),
   charsRemaining: PropTypes.number,
   handleTargetFound: PropTypes.func,
-  time: PropTypes.number,
+  handleGameRestart: PropTypes.func,
+  gameStart: PropTypes.bool,
+  gameOver: PropTypes.bool,
+  time: PropTypes.shape({
+    start: PropTypes.number,
+    end: PropTypes.number,
+  }),
 };
 
 const StyledMain = styled.main`
   overflow: hidden;
   user-select: none;
+  background-color: #3d3d3d;
 `;
 
 const GameWrapper = styled.div`
