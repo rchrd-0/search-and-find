@@ -24,7 +24,6 @@ const Main = (props) => {
     handleTargetFound,
     time,
   } = props;
-  const [gameOver, setGameOver] = useState(true);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
@@ -38,25 +37,9 @@ const Main = (props) => {
 
   const mainRef = useRef();
 
-  // Handle game start
-  useEffect(() => {
-    if (gameStart) setGameOver(false);
-  }, [gameStart]);
-
-  // useEffect(() => {
-  //   if (!gameOver) {
-  //     const timer = setInterval(() => {
-  //       setTime((prevState) => prevState + 1);
-  //     }, 1000);
-
-  //     return () => {
-  //       clearInterval(timer);
-  //     };
-  //   }
-  // }, [gameOver]);
-
   const handleMainClick = (e) => {
     const { pageX, pageY } = e;
+
     // console.log(
     //   pageX / mainRef.current.offsetWidth,
     //   pageY / mainRef.current.offsetHeight
@@ -130,14 +113,6 @@ const Main = (props) => {
     }
   }, [snackbar, snackbarActive]);
 
-  // useEffect(() => {
-  //   const charactersRemaining = characters.filter((char) => !char.found).length;
-  //   if (charactersRemaining === 0) {
-  //     setGameOver(true);
-  //   }
-  //   console.log(charactersRemaining);
-  // }, [characters]);
-
   return (
     <StyledMain>
       <Header
@@ -145,7 +120,7 @@ const Main = (props) => {
         charsRemaining={charsRemaining}
         toggleDropdown={toggleDropdown}
         dropdown={dropdown}
-        gameOver={gameOver}
+        // gameOver={gameOver}
         time={time}
       />
       <Dropdown characters={characters} active={dropdown} />

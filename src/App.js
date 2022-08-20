@@ -12,24 +12,25 @@ import './assets/styles/reset.css';
 
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
   const [menuActive, setMenuActive] = useState(true);
 
   const [level, setLevel] = useState('snes');
 
   const [characters, setCharacters] = useState([]);
-  const [charsRemaining, setCharsRemaining] = useState(0);
+  const [charsRemaining, setCharsRemaining] = useState(5);
   const [time, setTime] = useState(0);
 
   const handleGameStart = () => {
     setGameStart(true);
   };
 
-  // Fn passed as prop to Main to allow changing character state
+  // Fn passed as prop to Main to allow updating character state
   const handleTargetFound = (newList) => setCharacters(newList);
 
   // Handles timer when game is in play
   useEffect(() => {
-    if (gameStart) {
+    if (gameStart && !gameOver) {
       const timer = setInterval(() => {
         setTime((prevState) => prevState + 1);
       }, 1000);
@@ -38,17 +39,13 @@ const App = () => {
         clearInterval(timer);
       };
     }
-  }, [gameStart]);
+  }, [gameStart, gameOver]);
 
-  // Sets correct character list on gameStart
+  // Sets correct character list object on level change
   useEffect(() => {
-    if (gameStart) {
-      const thisLevel = charManifest.find((obj) => obj.id === level);
-      setCharacters(
-        thisLevel.charList.map((obj) => ({ ...obj, found: false }))
-      );
-    }
-  }, [gameStart, level]);
+    const thisLevel = charManifest.find((obj) => obj.id === level);
+    setCharacters(thisLevel.charList.map((obj) => ({ ...obj, found: false })));
+  }, [level]);
 
   // Updates charRemaining state dependent on character state changes
   useEffect(() => {
@@ -56,12 +53,19 @@ const App = () => {
     setCharsRemaining(remaining);
   }, [characters]);
 
+  // Game over state when all characters found
+  useEffect(() => {
+    if (gameStart && charsRemaining === 0) {
+      setGameOver(true);
+    }
+  }, [gameStart, charsRemaining]);
+
   return (
     <>
       <GlobalStyle />
       <Theme>
         <AppWrapper>
-          {!gameStart ? (
+          {!gameStart && !gameOver ? (
             <Start level={level} handleGameStart={handleGameStart} />
           ) : null}
           {gameStart ? (
