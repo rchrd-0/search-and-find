@@ -18,6 +18,7 @@ const App = () => {
 
   const [characters, setCharacters] = useState([]);
   const [charsRemaining, setCharsRemaining] = useState(0);
+  const [time, setTime] = useState(0);
 
   const handleGameStart = () => {
     setGameStart(true);
@@ -25,6 +26,19 @@ const App = () => {
 
   // Fn passed as prop to Main to allow changing character state
   const handleTargetFound = (newList) => setCharacters(newList);
+
+  // Handles timer when game is in play
+  useEffect(() => {
+    if (gameStart) {
+      const timer = setInterval(() => {
+        setTime((prevState) => prevState + 1);
+      }, 1000);
+
+      return () => {
+        clearInterval(timer);
+      };
+    }
+  }, [gameStart]);
 
   // Sets correct character list on gameStart
   useEffect(() => {
@@ -57,6 +71,7 @@ const App = () => {
               characters={characters}
               charsRemaining={charsRemaining}
               handleTargetFound={handleTargetFound}
+              time={time}
             />
           ) : null}
         </AppWrapper>

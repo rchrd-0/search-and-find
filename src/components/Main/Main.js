@@ -16,8 +16,14 @@ import cursor64 from '../../assets/icons/cursor64.svg';
 import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
-  const { gameStart, level, characters, charsRemaining, handleTargetFound } =
-    props;
+  const {
+    gameStart,
+    level,
+    characters,
+    charsRemaining,
+    handleTargetFound,
+    time,
+  } = props;
   const [gameOver, setGameOver] = useState(true);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
@@ -32,24 +38,22 @@ const Main = (props) => {
 
   const mainRef = useRef();
 
-  const [time, setTime] = useState(0);
-
   // Handle game start
   useEffect(() => {
     if (gameStart) setGameOver(false);
   }, [gameStart]);
 
-  useEffect(() => {
-    if (!gameOver) {
-      const timer = setInterval(() => {
-        setTime((prevState) => prevState + 1);
-      }, 1000);
+  // useEffect(() => {
+  //   if (!gameOver) {
+  //     const timer = setInterval(() => {
+  //       setTime((prevState) => prevState + 1);
+  //     }, 1000);
 
-      return () => {
-        clearInterval(timer);
-      };
-    }
-  }, [gameOver]);
+  //     return () => {
+  //       clearInterval(timer);
+  //     };
+  //   }
+  // }, [gameOver]);
 
   const handleMainClick = (e) => {
     const { pageX, pageY } = e;
@@ -181,10 +185,7 @@ Main.propTypes = {
   ),
   charsRemaining: PropTypes.number,
   handleTargetFound: PropTypes.func,
-  // offset: PropTypes.shape({
-  //   x: PropTypes.number,
-  //   y: PropTypes.number,
-  // }),
+  time: PropTypes.number,
 };
 
 const StyledMain = styled.main`
