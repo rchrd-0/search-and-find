@@ -13,14 +13,11 @@ import Image from './Image';
 
 import * as cursorOffset from '../../helpers/cursorOffset';
 import cursor64 from '../../assets/icons/cursor64.svg';
-import charManifest from '../../assets/imageCharManifest';
 import * as checkGame from '../../helpers/checkGame';
 
 const Main = (props) => {
-  const { gameStart, level } = props;
-
+  const { gameStart, level, characters, handleTargetFound } = props;
   const [gameOver, setGameOver] = useState(true);
-  const [characters, setCharacters] = useState([]);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
   const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
@@ -70,7 +67,8 @@ const Main = (props) => {
     const characterCoord = await firebase.getTargetCharacter(id, level);
     const result = checkGame.isInRange(cursor, characterCoord);
     if (result) {
-      const foundName = characters.find((char) => char.id === id).name;
+      const { name } = characters.find((char) => char.id === id);
+
       const updatedCharacters = characters.map((char) => {
         if (char.id === id) {
           return {
@@ -84,9 +82,9 @@ const Main = (props) => {
         return char;
       });
 
-      setCharacters(updatedCharacters);
+      handleTargetFound(updatedCharacters);
 
-      setSnackbar({ char: foundName, success: true });
+      setSnackbar({ char: name, success: true });
     } else {
       setSnackbar({ char: '', success: false });
     }
@@ -96,12 +94,6 @@ const Main = (props) => {
   };
 
   const toggleDropdown = () => setDropdown((prevState) => !prevState);
-
-  // Sets level manifest to correct object on level mount
-  useEffect(() => {
-    const thisLevel = charManifest.find((obj) => obj.id === level);
-    setCharacters(thisLevel.charList.map((obj) => ({ ...obj, found: false })));
-  }, [level]);
 
   // Determines target & context menu placement on cursor state change
   useEffect(() => {
@@ -177,6 +169,15 @@ const Main = (props) => {
 Main.propTypes = {
   gameStart: PropTypes.bool,
   level: PropTypes.string,
+  characters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      img: PropTypes.string,
+      found: PropTypes.bool,
+    })
+  ),
+  handleTargetFound: PropTypes.func,
   // offset: PropTypes.shape({
   //   x: PropTypes.number,
   //   y: PropTypes.number,

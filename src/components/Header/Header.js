@@ -59,6 +59,9 @@ const Heading = styled.h1`
   font-style: italic;
   font-weight: 600;
   color: ${(props) => props.theme.color.psRed};
+  text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
+    0px 18px 23px rgba(0, 0, 0, 0.1);
+  font-size: 2rem;
 `;
 
 const Accent = styled.span`
@@ -76,6 +79,7 @@ const NotiBubble = styled.div`
   cursor: pointer;
   color: #f2c300;
   background-color: #2e6db4;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 const Minimize = styled.img`
