@@ -1,20 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { differenceInSeconds } from 'date-fns';
 
 import * as Menu from '../Styled/Menu';
 import MenuFlex from './MenuFlex';
 import Button from '../Styled/Button';
 import getLevelManifest from '../../assets/levelManifest';
-
-import formatTime from '../../helpers/formatTime';
+import * as formatTime from '../../helpers/formatTime';
 
 const EndScreen = (props) => {
   const { time, level, handleGameRestart } = props;
   const thisLevel = getLevelManifest().find((obj) => obj.id === level);
 
-  const inSeconds = differenceInSeconds(time.end, time.start);
+  const inSeconds = formatTime.getSeconds(time.end, time.start);
+  const milliseconds = formatTime.getMs(time.end, time.start);
 
   return (
     <EndPage>
@@ -26,7 +25,9 @@ const EndScreen = (props) => {
             <Heading>Results</Heading>
             <Time>
               <Subhead>Your time</Subhead>
-              <Text>{formatTime(inSeconds)}</Text>
+              <Text>
+                {formatTime.formatSeconds(inSeconds)}.{milliseconds}
+              </Text>
             </Time>
             <NameInput />
             <Button onClick={handleGameRestart}>Play again</Button>

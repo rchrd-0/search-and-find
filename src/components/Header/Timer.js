@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import formatTime from '../../helpers/formatTime';
+import * as formatTime from '../../helpers/formatTime';
 
 const Timer = (props) => {
   const { gameStart, gameOver } = props;
@@ -19,7 +19,7 @@ const Timer = (props) => {
     }
   }, [gameStart, gameOver]);
 
-  return <StyledTimer>{formatTime(time)}</StyledTimer>;
+  return <StyledTimer>{formatTime.formatSeconds(time)}</StyledTimer>;
 };
 
 Timer.propTypes = {

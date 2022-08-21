@@ -121,9 +121,9 @@ const Main = (props) => {
     <>
       {gameOver ? (
         <EndScreen
-          time={time}
           level={level}
           handleGameRestart={handleGameRestart}
+          time={time}
         />
       ) : null}
       <StyledMain>
@@ -180,6 +180,7 @@ Main.propTypes = {
     start: PropTypes.number,
     end: PropTypes.number,
   }),
+  // score: PropTypes.number,
 };
 
 const StyledMain = styled.main`

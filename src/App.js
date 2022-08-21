@@ -14,7 +14,8 @@ import './assets/styles/reset.css';
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [time, setTime] = useState({ start: 0, end: 0 });
+  const [time, setTime] = useState({ start: null, end: null });
+  const [score, setScore] = useState(null);
   const [level, setLevel] = useState('snes');
   const [characters, setCharacters] = useState([]);
   const [charsRemaining, setCharsRemaining] = useState(5);
@@ -29,7 +30,8 @@ const App = () => {
   const handleGameRestart = () => {
     setGameStart(false);
     setGameOver(false);
-    setTime({ start: 0, end: 0 });
+    setTime({ start: null, end: null });
+    setScore(null);
   };
 
   const handleSelectNextLevel = () => {
@@ -52,7 +54,7 @@ const App = () => {
     ).charList;
 
     setCharacters(
-      characterList.map((obj) => ({ ...obj, found: false, foundTime: 0 }))
+      characterList.map((obj) => ({ ...obj, found: false, foundTime: null }))
     );
   }, [gameStart]);
 
@@ -69,6 +71,12 @@ const App = () => {
       setTime((prevState) => ({ ...prevState, end: Date.now() }));
     }
   }, [gameStart, charsRemaining]);
+
+  useEffect(() => {
+    if (time.end !== null && gameOver) {
+      setScore(time.end - time.start);
+    }
+  }, [time.end, gameOver]);
 
   const renderContent = () => {
     if (!gameStart && !gameOver) {
@@ -93,6 +101,7 @@ const App = () => {
           handleTargetFound={handleTargetFound}
           handleGameRestart={handleGameRestart}
           time={time}
+          score={score}
         />
       );
     }
