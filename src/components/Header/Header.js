@@ -6,12 +6,18 @@ import Timer from './Timer';
 import minimize from '../../assets/icons/minimize.svg';
 
 const Header = (props) => {
-  const { charsRemaining, toggleDropdown, dropdown, gameStart, gameOver } =
-    props;
+  const {
+    charsRemaining,
+    toggleDropdown,
+    dropdown,
+    gameStart,
+    gameOver,
+    handleGameRestart,
+  } = props;
 
   return (
     <StyledHeader>
-      <Heading>
+      <Heading onClick={handleGameRestart}>
         Retro<Accent>Search</Accent>
       </Heading>
       <Timer gameStart={gameStart} gameOver={gameOver} />
@@ -29,6 +35,7 @@ Header.propTypes = {
   dropdown: PropTypes.bool,
   gameStart: PropTypes.bool,
   gameOver: PropTypes.bool,
+  handleGameRestart: PropTypes.func,
 };
 
 const StyledHeader = styled.header`
@@ -53,6 +60,7 @@ const Heading = styled.h1`
   text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
     0px 18px 23px rgba(0, 0, 0, 0.1);
   font-size: 2rem;
+  cursor: pointer;
 `;
 
 const Accent = styled.span`

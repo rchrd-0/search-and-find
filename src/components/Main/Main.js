@@ -134,6 +134,7 @@ const Main = (props) => {
           dropdown={dropdown}
           gameStart={gameStart}
           gameOver={gameOver}
+          handleGameRestart={handleGameRestart}
         />
         <Dropdown characters={characters} active={dropdown} />
         <Snackbar content={snackbar} active={snackbarActive} />
