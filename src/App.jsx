@@ -53,9 +53,7 @@ const App = () => {
       (obj) => obj.id === level
     ).charList;
 
-    setCharacters(
-      characterList.map((obj) => ({ ...obj, found: false, foundTime: null }))
-    );
+    setCharacters(characterList.map((obj) => ({ ...obj, found: false })));
   }, [gameStart]);
 
   // Updates charRemaining state dependent on character state changes
@@ -72,6 +70,7 @@ const App = () => {
     }
   }, [gameStart, charsRemaining]);
 
+  // Sets score as interval between start and end times on gameOver
   useEffect(() => {
     if (time.end !== null && gameOver) {
       setScore(time.end - time.start);

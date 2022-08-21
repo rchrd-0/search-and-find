@@ -82,10 +82,11 @@ const LayoutPreview = styled.div`
 const BackgroundImage = styled.div`
   grid-area: 1 / 1 / -1 / -1;
   background-image: url('${(props) => props.levelImg}');
+  background-color: ${(props) => props.theme.color.darkGray};
   background-position: center;
   background-size: cover;
-  background-color: ${(props) => props.theme.color.darkGray};
   background-repeat: no-repeat;
+  border-radius: 8px;
   opacity: ${(props) => (props.active ? 1 : 0)};
   visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
   transition: all 0.3s ease-in-out;
