@@ -1,22 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import chevronLeft from '../../assets/icons/chevron-left.svg';
 import chevronRight from '../../assets/icons/chevron-right.svg';
-import importAll from '../../helpers/importAll';
 
 const Preview = (props) => {
   const { img, nextLevel, prevLevel } = props;
+  const [active, setActive] = useState(false);
 
-  const imgs = importAll(
-    require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
-  );
+  const fadeOut = () => setActive(false);
+
+  useEffect(() => {
+    if (!active) {
+      const fadeIn = setTimeout(() => {
+        setActive(true);
+      }, 100);
+
+      return () => clearTimeout(fadeIn);
+    }
+  }, [active]);
 
   return (
-    <LayoutPreview levelImg={img}>
-      <LevelSelectLeft chevron={chevronLeft} onClick={prevLevel} />
-      <LevelSelectRight chevron={chevronRight} onClick={nextLevel} />
+    <LayoutPreview>
+      <BackgroundImage levelImg={img} active={active} />
+      <LevelSelectLeft
+        chevron={chevronLeft}
+        onClick={() => {
+          fadeOut();
+          prevLevel();
+        }}
+      />
+      <LevelSelectRight
+        chevron={chevronRight}
+        onClick={() => {
+          fadeOut();
+          nextLevel();
+        }}
+      />
     </LayoutPreview>
   );
 };
@@ -34,13 +55,21 @@ const LayoutPreview = styled.div`
   width: 470px;
   height: 630px;
   border-radius: 8px;
+  background-color: ${(props) => props.theme.color.darkGray};
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+`;
+
+const BackgroundImage = styled.div`
+  grid-area: 1 / 1 / -1 / -1;
   background-image: url('${(props) => props.levelImg}');
   background-position: center;
   background-size: cover;
   background-color: ${(props) => props.theme.color.darkGray};
   background-repeat: no-repeat;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  opacity: ${(props) => (props.active ? 1 : 0)};
+  visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
+  transition: all 0.3s ease-in-out;
 `;
 
 const LevelSelect = styled.button`
@@ -51,6 +80,7 @@ const LevelSelect = styled.button`
   background-image: url('${(props) => props.chevron}');
   background-size: 70px;
   background-repeat: no-repeat;
+  z-index: 1;
 
   &:hover {
     opacity: 1;
@@ -59,6 +89,7 @@ const LevelSelect = styled.button`
 `;
 
 const LevelSelectLeft = styled(LevelSelect)`
+  grid-column: 1 / span 1;
   background-position: right center;
 `;
 
