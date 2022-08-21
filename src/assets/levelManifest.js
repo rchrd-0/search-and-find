@@ -1,4 +1,4 @@
-const charManifest = [
+const levelManifest = [
   {
     id: 'snes',
     img: 'snes',
@@ -97,4 +97,6 @@ const charManifest = [
   },
 ];
 
-export default charManifest;
+const getLevelManifest = () => levelManifest;
+
+export default getLevelManifest;

@@ -24,6 +24,10 @@ ul {
   list-style-type: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* button {
   padding: 6px 12px;
   cursor: pointer;

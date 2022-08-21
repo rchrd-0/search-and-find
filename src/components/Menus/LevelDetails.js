@@ -4,21 +4,21 @@ import PropTypes from 'prop-types';
 
 import Button from '../Styled/Button';
 import importAll from '../../helpers/importAll';
-import charManifest from '../../assets/imageCharManifest';
+import getLevelManifest from '../../assets/levelManifest';
 
 const LevelDetails = (props) => {
   const { level, onClick } = props;
 
-  const levelManifest = charManifest.find((obj) => obj.id === level);
+  const thisLevel = getLevelManifest().find((obj) => obj.id === level);
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
   );
 
   return (
     <Details>
-      <LevelName>{levelManifest.name}</LevelName>
+      <LevelName>{thisLevel.name}</LevelName>
       <CharacterList>
-        {levelManifest.charList.map((item) => (
+        {thisLevel.charList.map((item) => (
           <Character key={item.id}>
             <CharacterImage img={imgs[`${item.img}.png`]} />
             {item.name}
@@ -46,9 +46,10 @@ const Details = styled.div`
   align-items: center;
   width: 400px;
   background-color: ${(props) => props.theme.color.gray};
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-radius: 8px;
   gap: 24px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 `;
 
 const LevelName = styled.h1`

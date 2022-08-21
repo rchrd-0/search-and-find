@@ -6,20 +6,20 @@ import { differenceInSeconds } from 'date-fns';
 import * as Menu from '../Styled/Menu';
 import MenuFlex from './MenuFlex';
 import Button from '../Styled/Button';
-import charManifest from '../../assets/imageCharManifest';
+import getLevelManifest from '../../assets/levelManifest';
 
 import formatTime from '../../helpers/formatTime';
 
 const EndScreen = (props) => {
   const { time, level, handleGameRestart } = props;
-  const levelManifest = charManifest.find((obj) => obj.id === level);
+  const thisLevel = getLevelManifest().find((obj) => obj.id === level);
 
   const inSeconds = differenceInSeconds(time.end, time.start);
 
   return (
     <EndPage>
       <MenuFlex>
-        <Header>{levelManifest.name} complete!</Header>
+        <Header>{thisLevel.name} complete!</Header>
         <Menu.Container>
           <Leaderboard />
           <GameScore>

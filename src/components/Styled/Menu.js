@@ -18,10 +18,11 @@ const Header = styled.h1`
 
 const Container = styled.div`
   display: flex;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  /* border-radius: 8px; */
+  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px; */
   align-self: center;
+  gap: 30px;
 `;
 
 export { Page, Header, Container };

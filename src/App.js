@@ -6,7 +6,8 @@ import Main from './components/Main/Main';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
 import Theme from './assets/styles/Theme';
-import charManifest from './assets/imageCharManifest';
+import getLevelManifest from './assets/levelManifest';
+import * as levelSelection from './helpers/levelSelection';
 import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
 
@@ -14,9 +15,11 @@ const App = () => {
   const [gameStart, setGameStart] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [time, setTime] = useState({ start: 0, end: 0 });
-  const [level, setLevel] = useState('dreamcast');
+  const [level, setLevel] = useState('snes');
   const [characters, setCharacters] = useState([]);
   const [charsRemaining, setCharsRemaining] = useState(5);
+
+  const levelManifest = getLevelManifest();
 
   const handleGameStart = () => {
     setGameStart(true);
@@ -29,14 +32,27 @@ const App = () => {
     setTime({ start: 0, end: 0 });
   };
 
+  const handleSelectNextLevel = () => {
+    const next = levelSelection.nextLevel(level);
+    setLevel(next);
+  };
+
+  const handleSelectPrevLevel = () => {
+    const prev = levelSelection.previousLevel(level);
+    setLevel(prev);
+  };
+
   // Fn passed as prop to Main to allow updating character state
   const handleTargetFound = (newList) => setCharacters(newList);
 
   // Sets correct character list object on gameStart
   useEffect(() => {
-    const thisLevel = charManifest.find((obj) => obj.id === level);
+    const characterList = levelManifest.find(
+      (obj) => obj.id === level
+    ).charList;
+
     setCharacters(
-      thisLevel.charList.map((obj) => ({ ...obj, found: false, foundTime: 0 }))
+      characterList.map((obj) => ({ ...obj, found: false, foundTime: 0 }))
     );
   }, [gameStart]);
 
@@ -56,7 +72,14 @@ const App = () => {
 
   const renderContent = () => {
     if (!gameStart && !gameOver) {
-      return <StartScreen level={level} handleGameStart={handleGameStart} />;
+      return (
+        <StartScreen
+          level={level}
+          handleGameStart={handleGameStart}
+          nextLevel={handleSelectNextLevel}
+          prevLevel={handleSelectPrevLevel}
+        />
+      );
     }
 
     if (gameStart) {
