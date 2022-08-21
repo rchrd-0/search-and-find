@@ -11,6 +11,25 @@ const Preview = (props) => {
 
   const fadeOut = () => setActive(false);
 
+  const handleKeyUp = (e) => {
+    const { code } = e;
+    if (code === 'ArrowRight') {
+      nextLevel();
+    }
+
+    if (code === 'ArrowLeft') {
+      prevLevel();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  });
+
   useEffect(() => {
     if (!active) {
       const fadeIn = setTimeout(() => {
