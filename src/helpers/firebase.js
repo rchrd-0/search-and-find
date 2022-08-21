@@ -1,14 +1,42 @@
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  addDoc,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
+import uniqid from 'uniqid';
 import { db } from '../firebase/firebase-config';
 
-const getCharacters = async (level) => {
-  const targetLevel = doc(db, 'target', level);
-  const characters = await getDoc(targetLevel);
+const fetchCharacterList = async (level) => {
+  const docRef = doc(db, 'target', level);
+  const characters = await getDoc(docRef);
   return characters;
 };
 
-const getTargetCharacter = async (id, level) => {
-  const characters = await getCharacters(level);
+const fetchTarget = async (id, level) => {
+  const characters = await fetchCharacterList(level);
   return characters.exists() ? characters.data()[id] : console.log('Whoops!');
 };
-export { getTargetCharacter, getCharacters };
+
+// const fetchLevelScores = async (level) => {
+//   const targetLevel = doc(db, 'leaderboard', level);
+//   const leaderboard = await getDoc(targetLevel);
+//   return leaderboard;
+// };
+
+const addNewScore = async (level, score, name) => {
+  const playerId = uniqid();
+
+  const docRef = doc(db, 'leaderboard', level);
+  await updateDoc(docRef, playerId, {
+    name,
+    score,
+    date: Timestamp.now(),
+  });
+};
+
+export { fetchTarget, addNewScore };

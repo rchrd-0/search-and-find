@@ -26,6 +26,7 @@ const Main = (props) => {
     gameStart,
     gameOver,
     time,
+    addScore,
   } = props;
 
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -56,7 +57,7 @@ const Main = (props) => {
   };
 
   const handleContextMenuClick = async (id) => {
-    const characterCoord = await firebase.getTargetCharacter(id, level);
+    const characterCoord = await firebase.fetchTarget(id, level);
     const result = checkGame.isInRange(cursor, characterCoord);
     if (result) {
       const { name } = characters.find((char) => char.id === id);
@@ -124,6 +125,7 @@ const Main = (props) => {
           level={level}
           handleGameRestart={handleGameRestart}
           time={time}
+          addScore={addScore}
         />
       ) : null}
       <StyledMain>
@@ -180,6 +182,7 @@ Main.propTypes = {
     start: PropTypes.number,
     end: PropTypes.number,
   }),
+  addScore: PropTypes.func,
   // score: PropTypes.number,
 };
 

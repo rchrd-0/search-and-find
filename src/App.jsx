@@ -10,6 +10,7 @@ import getLevelManifest from './assets/levelManifest';
 import * as levelSelection from './helpers/levelSelection';
 import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
+import * as firebase from './helpers/firebase';
 
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
@@ -46,6 +47,11 @@ const App = () => {
 
   // Fn passed as prop to Main to allow updating character state
   const handleTargetFound = (newList) => setCharacters(newList);
+
+  const addScore = (e, name) => {
+    e.preventDefault();
+    firebase.addNewScore(level, score, name);
+  };
 
   // Sets correct character list object on gameStart
   useEffect(() => {
@@ -101,6 +107,7 @@ const App = () => {
           handleGameRestart={handleGameRestart}
           time={time}
           score={score}
+          addScore={addScore}
         />
       );
     }
