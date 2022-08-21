@@ -67,6 +67,7 @@ EndScreen.propTypes = {
   }),
   level: PropTypes.string,
   handleGameRestart: PropTypes.func,
+  addScore: PropTypes.func,
 };
 
 const EndPage = styled(Menu.Page)`
@@ -119,6 +120,8 @@ const ScoreForm = styled.form`
 const NameInput = styled.input.attrs({
   type: 'text',
   maxLength: '3',
+  minLength: '3',
+  placeholder: '3 letter nametag e.g. ABC',
 })`
   width: 100px;
 `;
