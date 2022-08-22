@@ -7,6 +7,7 @@ import {
   Timestamp,
   query,
   orderBy,
+  limit,
 } from 'firebase/firestore';
 import uniqid from 'uniqid';
 import { db } from '../firebase/firebase-config';
@@ -22,9 +23,9 @@ const fetchTarget = async (id, level) => {
   return characters.exists() ? characters.data()[id] : console.log('Whoops!');
 };
 
-const fetchLeaderboard = async (level) => {
+const fetchLeaderboard = async (level, n) => {
   const collectionRef = collection(db, `leaderboard-${level}`);
-  const q = query(collectionRef, orderBy('score'));
+  const q = query(collectionRef, orderBy('score'), limit(n));
   const sortedLeaderboard = await getDocs(q);
 
   return sortedLeaderboard.docs.map((item) => ({ ...item.data() }));
