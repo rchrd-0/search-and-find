@@ -24,11 +24,6 @@ const App = () => {
 
   const levelManifest = getLevelManifest();
 
-  // const foo = async () => {
-  //   const leaderboard = await firebase.fetchLeaderboard(level);
-  //   console.log(leaderboard);
-  // };
-
   useEffect(() => {
     (async () => {
       const data = await firebase.fetchLeaderboard(level);

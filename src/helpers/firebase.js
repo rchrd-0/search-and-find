@@ -27,8 +27,10 @@ const fetchLeaderboard = async (level, n) => {
   const collectionRef = collection(db, `leaderboard-${level}`);
   const q = query(collectionRef, orderBy('score'), limit(n));
   const sortedLeaderboard = await getDocs(q);
-
-  return sortedLeaderboard.docs.map((item) => ({ ...item.data() }));
+  return sortedLeaderboard.docs.map((item) => ({
+    ...item.data(),
+    id: item.id,
+  }));
 };
 
 const addNewScore = async (level, score, name) => {
