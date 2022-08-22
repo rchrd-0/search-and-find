@@ -10,9 +10,9 @@ const Leaderboard = (props) => {
     <Layout>
       <List>
         {data.map((item) => (
-          <li key={item.id}>
-            {item.name.toUpperCase()} {formatTime.score(item.score)}.
-          </li>
+          <ListItem key={item.id}>
+            {item.name.toUpperCase()} {formatTime.score(item.score)}
+          </ListItem>
         ))}
       </List>
     </Layout>
@@ -36,6 +36,12 @@ const List = styled.ol`
   display: flex;
   flex-direction: column;
   gap: 12px;
+`;
+
+const ListItem = styled.li`
+  /* &::marker {
+    color: blue;
+  } */
 `;
 
 export default Leaderboard;

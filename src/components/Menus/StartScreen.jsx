@@ -9,7 +9,6 @@ import Preview from './Preview';
 import LevelDetails from './LevelDetails';
 import Leaderboard from './Leaderboard';
 import importAll from '../../helpers/importAll';
-import getLevelManifest from '../../assets/levelManifest';
 
 const StartScreen = (props) => {
   const {
@@ -26,6 +25,8 @@ const StartScreen = (props) => {
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
   );
 
+  const selectMenu = () => setLeaderboardActive((prevState) => !prevState);
+
   return (
     <StartPage background={imgs['background.svg']}>
       <MenuFlex>
@@ -41,13 +42,18 @@ const StartScreen = (props) => {
 
           <MenuLeft>
             <LevelName>{thisLevel.name}</LevelName>
-            <LevelDetails level={level} charList={thisLevel.charList} />
-            {/* <Leaderboard data={leaderboard} /> */}
+            {leaderboardActive ? (
+              <Leaderboard data={leaderboard} />
+            ) : (
+              <LevelDetails level={level} charList={thisLevel.charList} />
+            )}
             <ButtonWrapper>
               <Button type="button" onClick={handleGameStart}>
                 Play
               </Button>
-              <Button type="button">Leaderboard</Button>
+              <Button type="button" onClick={selectMenu}>
+                {leaderboardActive ? 'Characters' : 'Leaderboard'}
+              </Button>
             </ButtonWrapper>
           </MenuLeft>
         </Menu.Container>
@@ -119,7 +125,5 @@ const ButtonWrapper = styled.div`
   display: flex;
   gap: 24px;
 `;
-
-// const StartMenuButton = styled(Button)``;
 
 export default StartScreen;

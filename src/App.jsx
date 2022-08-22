@@ -24,13 +24,6 @@ const App = () => {
 
   const levelManifest = getLevelManifest();
 
-  useEffect(() => {
-    (async () => {
-      const data = await firebase.fetchLeaderboard(level);
-      setLeaderboard(data);
-    })();
-  }, [level]);
-
   const handleGameStart = () => {
     setGameStart(true);
     setTime((prevState) => ({ ...prevState, start: Date.now() }));
@@ -90,6 +83,14 @@ const App = () => {
       setScore(time.end - time.start);
     }
   }, [time.end, gameOver]);
+
+  // Fetch leaderboard on gameOver or level change
+  useEffect(() => {
+    (async () => {
+      const data = await firebase.fetchLeaderboard(level);
+      setLeaderboard(data);
+    })();
+  }, [gameOver, level]);
 
   const renderContent = () => {
     if (!gameStart && !gameOver) {
