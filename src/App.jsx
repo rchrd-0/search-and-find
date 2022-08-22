@@ -20,8 +20,21 @@ const App = () => {
   const [level, setLevel] = useState('snes');
   const [characters, setCharacters] = useState([]);
   const [charsRemaining, setCharsRemaining] = useState(5);
+  const [leaderboard, setLeaderboard] = useState([]);
 
   const levelManifest = getLevelManifest();
+
+  // const foo = async () => {
+  //   const leaderboard = await firebase.fetchLeaderboard(level);
+  //   console.log(leaderboard);
+  // };
+
+  useEffect(() => {
+    (async () => {
+      const data = await firebase.fetchLeaderboard(level);
+      setLeaderboard(data);
+    })();
+  }, [level]);
 
   const handleGameStart = () => {
     setGameStart(true);
@@ -88,9 +101,11 @@ const App = () => {
       return (
         <StartScreen
           level={level}
+          thisLevel={levelManifest.find((obj) => obj.id === level)}
           handleGameStart={handleGameStart}
           nextLevel={handleSelectNextLevel}
           prevLevel={handleSelectPrevLevel}
+          leaderboard={leaderboard}
         />
       );
     }

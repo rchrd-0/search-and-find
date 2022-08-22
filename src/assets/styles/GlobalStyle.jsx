@@ -10,7 +10,6 @@ body {
 }
 
 body > #root {
-  flex: 1;
 }
 
 a,

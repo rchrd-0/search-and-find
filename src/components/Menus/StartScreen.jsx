@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as Menu from '../Styled/Menu';
+import Button from '../Styled/Button';
 import MenuFlex from './MenuFlex';
 import Preview from './Preview';
 import LevelDetails from './LevelDetails';
+import Leaderboard from './Leaderboard';
 import importAll from '../../helpers/importAll';
+import getLevelManifest from '../../assets/levelManifest';
 
 const StartScreen = (props) => {
-  const { level, handleGameStart, nextLevel, prevLevel } = props;
+  const {
+    level,
+    thisLevel,
+    handleGameStart,
+    nextLevel,
+    prevLevel,
+    leaderboard,
+  } = props;
+  const [leaderboardActive, setLeaderboardActive] = useState(false);
 
   const imgs = importAll(
     require.context('../../assets/images', false, /\.(png|jpe?g|svg)$/)
@@ -27,7 +38,18 @@ const StartScreen = (props) => {
             nextLevel={nextLevel}
             prevLevel={prevLevel}
           />
-          <LevelDetails level={level} onClick={handleGameStart} />
+
+          <MenuLeft>
+            <LevelName>{thisLevel.name}</LevelName>
+            {/* <LevelDetails level={level} charList={thisLevel.charList} /> */}
+            <Leaderboard data={leaderboard} />
+            <ButtonWrapper>
+              <Button type="button" onClick={handleGameStart}>
+                Play
+              </Button>
+              <Button type="button">Leaderboard</Button>
+            </ButtonWrapper>
+          </MenuLeft>
         </Menu.Container>
       </MenuFlex>
     </StartPage>
@@ -39,6 +61,24 @@ StartScreen.propTypes = {
   handleGameStart: PropTypes.func,
   prevLevel: PropTypes.func,
   nextLevel: PropTypes.func,
+  thisLevel: PropTypes.shape({
+    id: PropTypes.string,
+    img: PropTypes.string,
+    name: PropTypes.string,
+    charList: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        img: PropTypes.string,
+      })
+    ),
+  }),
+  leaderboard: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      score: PropTypes.number,
+    })
+  ),
 };
 
 const StartPage = styled(Menu.Page)`
@@ -46,6 +86,22 @@ const StartPage = styled(Menu.Page)`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+`;
+
+const MenuLeft = styled.div`
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  gap: 16px;
+`;
+
+const LevelName = styled.h1`
+  font-size: 2.4rem;
+  font-weight: 500;
+  margin-top: 20px;
 `;
 
 const Heading = styled(Menu.Header)`
@@ -59,18 +115,11 @@ const Accent = styled.span`
   color: ${(props) => props.theme.color.psGreen};
 `;
 
-// const Preview = styled.div`
-//   display: grid;
-//   grid-template-columns: 80px 1fr 80px;
-//   grid-template-rows: 1fr 100px;
-//   width: 400px;
-//   height: 640px;
-//   border-top-left-radius: 8px;
-//   border-bottom-left-radius: 8px;
-//   background-image: url('${(props) => props.src}');
-//   background-position: center;
-//   background-size: 420px;
-//   background-color: ${(props) => props.theme.color.darkGray};
-// `;
+const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 24px;
+`;
+
+// const StartMenuButton = styled(Button)``;
 
 export default StartScreen;
