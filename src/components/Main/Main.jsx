@@ -25,8 +25,8 @@ const Main = (props) => {
     handleGameRestart,
     gameStart,
     gameOver,
-    time,
     addScore,
+    score,
   } = props;
 
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -124,8 +124,8 @@ const Main = (props) => {
         <EndScreen
           level={level}
           handleGameRestart={handleGameRestart}
-          time={time}
           addScore={addScore}
+          score={score}
         />
       ) : null}
       <StyledMain>
@@ -178,12 +178,8 @@ Main.propTypes = {
   handleGameRestart: PropTypes.func,
   gameStart: PropTypes.bool,
   gameOver: PropTypes.bool,
-  time: PropTypes.shape({
-    start: PropTypes.number,
-    end: PropTypes.number,
-  }),
   addScore: PropTypes.func,
-  // score: PropTypes.number,
+  score: PropTypes.number,
 };
 
 const StyledMain = styled.main`

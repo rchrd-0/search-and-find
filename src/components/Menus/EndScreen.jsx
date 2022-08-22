@@ -9,13 +9,11 @@ import getLevelManifest from '../../assets/levelManifest';
 import * as formatTime from '../../helpers/formatTime';
 
 const EndScreen = (props) => {
-  const { time, level, handleGameRestart, addScore } = props;
+  const { level, handleGameRestart, addScore, score } = props;
   const [name, setName] = useState('');
   const [formActive, setFormActive] = useState(true);
 
   const thisLevel = getLevelManifest().find((obj) => obj.id === level);
-  const inSeconds = formatTime.getSeconds(time.end, time.start);
-  const milliseconds = formatTime.getMs(time.end, time.start);
 
   const handleInput = (e) => {
     const { value } = e.target;
@@ -35,9 +33,7 @@ const EndScreen = (props) => {
             <Heading>Results</Heading>
             <Row>
               <Subhead>Your time</Subhead>
-              <Text>
-                {formatTime.formatSeconds(inSeconds)}.{milliseconds}
-              </Text>
+              <Text>{formatTime.score(score)}</Text>
             </Row>
             {formActive ? (
               <ScoreForm
@@ -61,13 +57,10 @@ const EndScreen = (props) => {
 };
 
 EndScreen.propTypes = {
-  time: PropTypes.shape({
-    start: PropTypes.number,
-    end: PropTypes.number,
-  }),
   level: PropTypes.string,
   handleGameRestart: PropTypes.func,
   addScore: PropTypes.func,
+  score: PropTypes.number,
 };
 
 const EndPage = styled(Menu.Page)`

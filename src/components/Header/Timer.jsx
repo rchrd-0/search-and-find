@@ -19,7 +19,7 @@ const Timer = (props) => {
     }
   }, [gameStart, gameOver]);
 
-  return <StyledTimer>{formatTime.formatSeconds(time)}</StyledTimer>;
+  return <StyledTimer>{formatTime.seconds(time)}</StyledTimer>;
 };
 
 Timer.propTypes = {

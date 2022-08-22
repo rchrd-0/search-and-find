@@ -41,8 +41,8 @@ const StartScreen = (props) => {
 
           <MenuLeft>
             <LevelName>{thisLevel.name}</LevelName>
-            {/* <LevelDetails level={level} charList={thisLevel.charList} /> */}
-            <Leaderboard data={leaderboard} />
+            <LevelDetails level={level} charList={thisLevel.charList} />
+            {/* <Leaderboard data={leaderboard} /> */}
             <ButtonWrapper>
               <Button type="button" onClick={handleGameStart}>
                 Play
