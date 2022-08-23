@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { scryRenderedComponentsWithType } from 'react-dom/test-utils';
 import * as firebase from '../../helpers/firebase';
 
 import EndScreen from '../Menus/EndScreen';
@@ -30,8 +31,8 @@ const Main = (props) => {
     leaderboard,
   } = props;
 
-  const [cursor, setCursor] = useState({ x: 0, y: 0 });
-  const [menu, setMenu] = useState({ x: 0, y: 0, margin: 0 });
+  const [cursor, setCursor] = useState({ x: 0, y: 0, clientY: 0 });
+  const [menu, setMenu] = useState({ x: 0, y: 0, marginX: 0, marginY: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [contextActive, setContextActive] = useState(false);
   const [snackbarActive, setSnackbarActive] = useState(false);
@@ -44,16 +45,12 @@ const Main = (props) => {
   const mainRef = useRef();
 
   const handleMainClick = (e) => {
-    const { pageX, pageY } = e;
-
-    console.log(
-      pageX / mainRef.current.offsetWidth,
-      pageY / mainRef.current.offsetHeight
-    );
+    const { pageX, pageY, clientY } = e;
 
     setCursor({
       x: pageX / mainRef.current.offsetWidth,
       y: pageY / mainRef.current.offsetHeight,
+      clientY,
     });
   };
 
@@ -97,9 +94,11 @@ const Main = (props) => {
     setMenu({
       x: cursor.x * 100,
       y: cursor.y * 100 - relativeToHeader,
-      margin: cursorOffset.getMenuMargin(offsetWidth, cursor.x),
+      marginX: cursorOffset.getMenuMarginX(offsetWidth, cursor.x),
+      marginY: cursorOffset.getMenuMarginY(cursor.clientY),
     });
 
+    // console.log(e.clientY);
     setTarget({
       x: cursor.x * 100,
       y: cursor.y * 100 - relativeToHeader,
@@ -194,6 +193,7 @@ Main.propTypes = {
 const StyledMain = styled.main`
   user-select: none;
   background-color: #3d3d3d;
+  overflow: hidden;
 `;
 
 const GameWrapper = styled.div`

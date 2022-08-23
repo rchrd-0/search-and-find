@@ -16,7 +16,8 @@ const ContextMenu = (props) => {
       menu={menu}
       xAxis={menu.x}
       yAxis={menu.y}
-      leftRight={menu.leftRight}
+      marginX={menu.marginX}
+      marginY={menu.marginY}
     >
       <List>
         {remainingChars.map((item) => (
@@ -55,8 +56,8 @@ const StyledContext = styled.div`
   position: absolute;
   top: ${(props) => props.menu.y}%;
   left: ${(props) => props.menu.x}%;
-  margin-top: -60px;
-  margin-left: ${(props) => props.menu.margin}px;
+  margin-top: ${(props) => props.menu.marginY}px;
+  margin-left: ${(props) => props.menu.marginX}px;
   display: flex;
   align-items: center;
   border-radius: 8px;
