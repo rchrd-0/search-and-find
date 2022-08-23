@@ -26,7 +26,8 @@ const StyledSnack = styled.div`
   left: 50%;
   transform: translate(-50%);
   display: flex;
-  background-color: ${(props) => (props.success ? '#66bcc5' : '#ffb74e')};
+  background-color: ${(props) =>
+    props.success ? props.theme.color.valid : props.theme.color.undefined};
   z-index: 1;
   font-size: 1.4rem;
   padding: 6px 12px;

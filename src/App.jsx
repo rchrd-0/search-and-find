@@ -56,7 +56,7 @@ const App = () => {
   };
 
   const addScore = (e, name) => {
-    e.preventDefault();
+    // e.preventDefault();
     firebase.addNewScore(level, score, name);
     refreshLeaderboard();
   };
@@ -136,7 +136,14 @@ const App = () => {
     <>
       <GlobalStyle />
       <Theme>
-        <AppWrapper>{renderContent()}</AppWrapper>
+        <EndScreen
+          level={level}
+          handleGameRestart={handleGameRestart}
+          addScore={addScore}
+          score={score}
+          leaderboard={leaderboard}
+        />
+        {/* <AppWrapper>{renderContent()}</AppWrapper> */}
       </Theme>
     </>
   );

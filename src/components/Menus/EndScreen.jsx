@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import * as Menu from '../Styled/Menu';
 import MenuFlex from './MenuFlex';
+import ScoreForm from './ScoreForm';
 import Button from '../Styled/Button';
 import getLevelManifest from '../../assets/levelManifest';
 import * as formatTime from '../../helpers/formatTime';
@@ -15,12 +16,6 @@ const EndScreen = (props) => {
   const [formActive, setFormActive] = useState(true);
 
   const thisLevel = getLevelManifest().find((obj) => obj.id === level);
-
-  const handleInput = (e) => {
-    const { value } = e.target;
-
-    setName(value);
-  };
 
   const hideForm = () => setFormActive(false);
 
@@ -40,19 +35,9 @@ const EndScreen = (props) => {
               <Time>{formatTime.score(score)}</Time>
             </TimeRow>
             {formActive ? (
-              <ScoreForm
-                onSubmit={(e) => {
-                  addScore(e, name);
-                  hideForm();
-                }}
-              >
-                <Row>
-                  <NameInput required value={name} onChange={handleInput} />
-                  <Button type="submit">Submit</Button>
-                </Row>
-              </ScoreForm>
+              <ScoreForm addScore={addScore} hideForm={hideForm} />
             ) : null}
-            <Button onClick={handleGameRestart}>Play again</Button>
+            <RestartBtn onClick={handleGameRestart}>Play again</RestartBtn>
           </GameScore>
         </Menu.Container>
       </MenuFlex>
@@ -77,6 +62,7 @@ const EndPage = styled(Menu.Page)`
   background-color: rgba(31, 31, 31, 0.894);
   z-index: 5;
   top: 0;
+  color: ${(props) => props.theme.color.menuText};
 `;
 
 const Header = styled(Menu.Header)`
@@ -85,9 +71,10 @@ const Header = styled(Menu.Header)`
 `;
 
 const LeaderboardWrapper = styled.div`
-  background-color: white;
+  background-color: ${(props) => props.theme.color.menuBg};
   padding: 24px 12px;
   border-radius: 8px;
+  box-shadow: ${(props) => props.theme.menuShadow};
 `;
 
 const GameScore = styled.div`
@@ -95,16 +82,17 @@ const GameScore = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
   gap: 10px;
   padding: 20px 0;
   align-self: flex-start;
   border-radius: 8px;
+  background-color: ${(props) => props.theme.color.menuBg};
+  box-shadow: ${(props) => props.theme.menuShadow};
 `;
 
 const Heading = styled.h1`
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const Subhead = styled.h2`
@@ -125,25 +113,11 @@ const TimeRow = styled.div`
   gap: 20px;
 `;
 
-const Row = styled.div``;
-
-const ScoreForm = styled.form`
-  display: flex;
-  width: 100%;
+const RestartBtn = styled(Button)`
+  background-color: ${(props) => props.theme.color.invalid};
+  color: white;
+  font-weight: 500;
+  margin-top: 12px;
 `;
-
-const NameInput = styled.input.attrs({
-  type: 'text',
-  maxLength: '3',
-  minLength: '3',
-  placeholder: '3 letter nametag e.g. ABC',
-})`
-  flex: 1;
-`;
-
-// const Leaderboard = styled.div`
-//   width: 300px;
-//   background-color: white;
-// `;
 
 export default EndScreen;

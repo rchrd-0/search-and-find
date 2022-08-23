@@ -105,7 +105,7 @@ const MenuLeft = styled.div`
 
 const LevelName = styled.h1`
   font-size: 2.4rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 20px;
 `;
 
@@ -123,7 +123,7 @@ const Accent = styled.span`
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 24px;
-  margin-top: 16px;
+  margin-top: 24px;
 `;
 
 export default StartScreen;

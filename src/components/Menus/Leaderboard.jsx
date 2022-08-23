@@ -57,7 +57,7 @@ const Layout = styled.div`
 
 const Heading = styled.h2`
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const List = styled.ul`
@@ -73,6 +73,7 @@ const List = styled.ul`
 
 const Position = styled.div`
   width: 30px;
+  height: 30px;
   text-align: center;
 `;
 
