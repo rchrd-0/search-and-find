@@ -35,10 +35,10 @@ const EndScreen = (props) => {
 
           <GameScore>
             <Heading>Results</Heading>
-            <Row>
+            <TimeRow>
               <Subhead>Your time</Subhead>
-              <Text>{formatTime.score(score)}</Text>
-            </Row>
+              <Time>{formatTime.score(score)}</Time>
+            </TimeRow>
             {formActive ? (
               <ScoreForm
                 onSubmit={(e) => {
@@ -103,30 +103,33 @@ const GameScore = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
 `;
 
 const Subhead = styled.h2`
-  flex: 1;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 `;
 
-const Text = styled.p`
-  font-size: 1.2rem;
+const Time = styled.p`
+  font-family: ${(props) => props.theme.font.mono};
+  font-size: 1.3rem;
 `;
 
-const Row = styled.div`
+const TimeRow = styled.div`
   width: 100%;
   display: flex;
-  flex: 1;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
   padding: 0 40px;
+  gap: 20px;
 `;
+
+const Row = styled.div``;
 
 const ScoreForm = styled.form`
   display: flex;
+  width: 100%;
 `;
 
 const NameInput = styled.input.attrs({
@@ -135,7 +138,7 @@ const NameInput = styled.input.attrs({
   minLength: '3',
   placeholder: '3 letter nametag e.g. ABC',
 })`
-  width: 100px;
+  flex: 1;
 `;
 
 // const Leaderboard = styled.div`

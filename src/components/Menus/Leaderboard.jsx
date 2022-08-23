@@ -57,7 +57,7 @@ const Layout = styled.div`
 
 const Heading = styled.h2`
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 const List = styled.ul`
@@ -85,7 +85,7 @@ const Podium = styled(Position)`
 
 const Name = styled.h3`
   justify-self: center;
-  font-weight: 600;
+  font-weight: 500;
 `;
 
 const Time = styled.p`

@@ -50,9 +50,15 @@ const App = () => {
   // Fn passed as prop to Main to allow updating character state
   const handleTargetFound = (newList) => setCharacters(newList);
 
+  const refreshLeaderboard = async () => {
+    const data = await firebase.fetchLeaderboard(level, 10);
+    setLeaderboard(data);
+  };
+
   const addScore = (e, name) => {
     e.preventDefault();
     firebase.addNewScore(level, score, name);
+    refreshLeaderboard();
   };
 
   // Sets correct character list object on gameStart
