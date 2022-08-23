@@ -27,6 +27,7 @@ const Main = (props) => {
     gameOver,
     addScore,
     score,
+    leaderboard,
   } = props;
 
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
@@ -126,8 +127,10 @@ const Main = (props) => {
           handleGameRestart={handleGameRestart}
           addScore={addScore}
           score={score}
+          leaderboard={leaderboard}
         />
       ) : null}
+
       <StyledMain>
         <Header
           characters={characters}
@@ -180,10 +183,15 @@ Main.propTypes = {
   gameOver: PropTypes.bool,
   addScore: PropTypes.func,
   score: PropTypes.number,
+  leaderboard: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      score: PropTypes.number,
+    })
+  ),
 };
 
 const StyledMain = styled.main`
-  overflow: hidden;
   user-select: none;
   background-color: #3d3d3d;
 `;

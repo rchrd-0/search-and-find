@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import StartScreen from './components/Menus/StartScreen';
+import EndScreen from './components/Menus/EndScreen';
 import Main from './components/Main/Main';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
@@ -84,10 +85,10 @@ const App = () => {
     }
   }, [time.end, gameOver]);
 
-  // Fetch leaderboard on gameOver or level change
+  // Fetch leaderboard on gameOver or level change; limit 10
   useEffect(() => {
     (async () => {
-      const data = await firebase.fetchLeaderboard(level);
+      const data = await firebase.fetchLeaderboard(level, 10);
       setLeaderboard(data);
     })();
   }, [gameOver, level]);
@@ -119,6 +120,7 @@ const App = () => {
           time={time}
           score={score}
           addScore={addScore}
+          leaderboard={leaderboard}
         />
       );
     }

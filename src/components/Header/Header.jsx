@@ -40,6 +40,7 @@ Header.propTypes = {
 
 const StyledHeader = styled.header`
   position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -50,7 +51,7 @@ const StyledHeader = styled.header`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   background-color: ${(props) => props.theme.color.gray};
-  z-index: 2;
+  z-index: 3;
 `;
 
 const Heading = styled.h1`

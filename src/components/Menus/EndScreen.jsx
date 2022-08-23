@@ -7,9 +7,10 @@ import MenuFlex from './MenuFlex';
 import Button from '../Styled/Button';
 import getLevelManifest from '../../assets/levelManifest';
 import * as formatTime from '../../helpers/formatTime';
+import Leaderboard from './Leaderboard';
 
 const EndScreen = (props) => {
-  const { level, handleGameRestart, addScore, score } = props;
+  const { level, handleGameRestart, addScore, score, leaderboard } = props;
   const [name, setName] = useState('');
   const [formActive, setFormActive] = useState(true);
 
@@ -28,7 +29,10 @@ const EndScreen = (props) => {
       <MenuFlex>
         <Header>{thisLevel.name} complete!</Header>
         <Menu.Container>
-          <Leaderboard />
+          <LeaderboardWrapper>
+            <Leaderboard data={leaderboard} />
+          </LeaderboardWrapper>
+
           <GameScore>
             <Heading>Results</Heading>
             <Row>
@@ -61,16 +65,29 @@ EndScreen.propTypes = {
   handleGameRestart: PropTypes.func,
   addScore: PropTypes.func,
   score: PropTypes.number,
+  leaderboard: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      score: PropTypes.number,
+    })
+  ),
 };
 
 const EndPage = styled(Menu.Page)`
   background-color: rgba(31, 31, 31, 0.894);
-  z-index: 3;
+  z-index: 5;
+  top: 0;
 `;
 
 const Header = styled(Menu.Header)`
   color: white;
   align-self: center;
+`;
+
+const LeaderboardWrapper = styled.div`
+  background-color: white;
+  padding: 24px 12px;
+  border-radius: 8px;
 `;
 
 const GameScore = styled.div`
@@ -81,6 +98,8 @@ const GameScore = styled.div`
   background-color: white;
   gap: 10px;
   padding: 20px 0;
+  align-self: flex-start;
+  border-radius: 8px;
 `;
 
 const Heading = styled.h1`
@@ -119,9 +138,9 @@ const NameInput = styled.input.attrs({
   width: 100px;
 `;
 
-const Leaderboard = styled.div`
-  width: 300px;
-  background-color: white;
-`;
+// const Leaderboard = styled.div`
+//   width: 300px;
+//   background-color: white;
+// `;
 
 export default EndScreen;

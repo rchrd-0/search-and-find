@@ -101,7 +101,6 @@ const MenuLeft = styled.div`
   align-items: center;
   background-color: white;
   border-radius: 8px;
-  gap: 16px;
 `;
 
 const LevelName = styled.h1`
@@ -124,6 +123,7 @@ const Accent = styled.span`
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 24px;
+  margin-top: 16px;
 `;
 
 export default StartScreen;
