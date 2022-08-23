@@ -55,8 +55,7 @@ const App = () => {
     setLeaderboard(data);
   };
 
-  const addScore = (e, name) => {
-    // e.preventDefault();
+  const addScore = (name) => {
     firebase.addNewScore(level, score, name);
     refreshLeaderboard();
   };

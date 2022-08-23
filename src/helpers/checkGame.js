@@ -8,4 +8,4 @@ const isInRange = (user, ideal) => {
   return x && y;
 };
 
-export { isInRange };
+export default isInRange;

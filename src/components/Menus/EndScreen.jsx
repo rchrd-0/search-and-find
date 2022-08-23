@@ -12,12 +12,17 @@ import Leaderboard from './Leaderboard';
 
 const EndScreen = (props) => {
   const { level, handleGameRestart, addScore, score, leaderboard } = props;
-  const [name, setName] = useState('');
   const [formActive, setFormActive] = useState(true);
 
   const thisLevel = getLevelManifest().find((obj) => obj.id === level);
 
-  const hideForm = () => setFormActive(false);
+  const hideForm = () => {
+    const timeout = setTimeout(() => {
+      setFormActive(false);
+    }, 200);
+
+    return () => clearTimeout(timeout);
+  };
 
   return (
     <EndPage>

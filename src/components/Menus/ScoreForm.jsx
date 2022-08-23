@@ -7,6 +7,7 @@ import Button from '../Styled/Button';
 const ScoreForm = (props) => {
   const { addScore, hideForm } = props;
   const [name, setName] = useState('');
+  const [valid, setValid] = useState(false);
 
   const handleInput = (e) => {
     const { value } = e.target;
@@ -14,28 +15,49 @@ const ScoreForm = (props) => {
     setName(value);
   };
 
+  useEffect(() => {
+    name.length === 3 ? setValid(true) : setValid(false);
+  }, [name]);
+
   return (
     <FormLayout
       onSubmit={(e) => {
         e.preventDefault();
-        addScore(e, name);
-        // hideForm();
+        if (valid) {
+          addScore(name);
+          hideForm();
+        }
       }}
       noValidate
     >
+      <FormInstructions>
+        Submit your score (3 character names only)
+      </FormInstructions>
       <NameInput required value={name} onChange={handleInput} />
       <SubmitBtn type="submit">Submit</SubmitBtn>
     </FormLayout>
   );
 };
 
+ScoreForm.propTypes = {
+  addScore: PropTypes.func,
+  hideForm: PropTypes.func,
+};
+
 const FormLayout = styled.form`
   display: flex;
+  justify-content: center;
   gap: 12px;
   width: 100%;
-  margin-top: 12px;
+  margin: 12px 0;
   padding: 0 24px;
-  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const FormInstructions = styled.div`
+  width: 100%;
+  font-weight: 300;
+  text-align: center;
 `;
 
 const NameInput = styled.input.attrs({

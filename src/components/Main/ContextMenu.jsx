@@ -38,7 +38,8 @@ ContextMenu.propTypes = {
   menu: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
-    leftRight: PropTypes.number,
+    marginX: PropTypes.number,
+    marginY: PropTypes.number,
   }),
   characters: PropTypes.arrayOf(
     PropTypes.shape({

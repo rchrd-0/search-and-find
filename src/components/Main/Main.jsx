@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { scryRenderedComponentsWithType } from 'react-dom/test-utils';
 import * as firebase from '../../helpers/firebase';
 
 import EndScreen from '../Menus/EndScreen';
@@ -15,7 +14,7 @@ import Image from './Image';
 
 import * as cursorOffset from '../../helpers/cursorOffset';
 import cursor64 from '../../assets/icons/cursor64.svg';
-import * as checkGame from '../../helpers/checkGame';
+import isInRange from '../../helpers/checkGame';
 
 const Main = (props) => {
   const {
@@ -56,7 +55,7 @@ const Main = (props) => {
 
   const handleContextMenuClick = async (id) => {
     const characterCoord = await firebase.fetchTarget(id, level);
-    const result = checkGame.isInRange(cursor, characterCoord);
+    const result = isInRange(cursor, characterCoord);
     if (result) {
       const { name } = characters.find((char) => char.id === id);
 
