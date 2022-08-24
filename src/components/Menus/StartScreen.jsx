@@ -95,6 +95,7 @@ const StartPage = styled(Menu.Page)`
 `;
 
 const MenuLeft = styled.div`
+  margin-top: 30px;
   width: 350px;
   padding-bottom: 24px;
   display: flex;
@@ -103,7 +104,6 @@ const MenuLeft = styled.div`
   border-radius: 8px;
   background-color: ${(props) => props.theme.color.menuBg};
   box-shadow: ${(props) => props.theme.menuShadow};
-  align-self: center;
   color: ${(props) => props.theme.color.menuText};
 `;
 

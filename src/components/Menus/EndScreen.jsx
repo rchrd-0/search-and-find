@@ -28,7 +28,7 @@ const EndScreen = (props) => {
     <EndPage>
       <MenuFlex>
         <Header titleColor={level}>{thisLevel.name} complete!</Header>
-        <Menu.Container>
+        <MenuContainer>
           <LeaderboardWrapper>
             <Leaderboard data={leaderboard} />
           </LeaderboardWrapper>
@@ -44,7 +44,7 @@ const EndScreen = (props) => {
             ) : null}
             <RestartBtn onClick={handleGameRestart}>Play again</RestartBtn>
           </GameScore>
-        </Menu.Container>
+        </MenuContainer>
       </MenuFlex>
     </EndPage>
   );
@@ -64,9 +64,11 @@ EndScreen.propTypes = {
 };
 
 const EndPage = styled(Menu.Page)`
+  display: flex;
+  min-width: 100vw;
+  position: fixed;
   background-color: rgba(51, 51, 51, 0.78);
   z-index: 5;
-  top: 0;
   color: ${(props) => props.theme.color.menuText};
 `;
 
@@ -74,6 +76,13 @@ const Header = styled(Menu.Header)`
   color: ${(props) => props.theme.color[props.titleColor]};
   align-self: center;
   margin-bottom: 16px;
+`;
+
+const MenuContainer = styled(Menu.Container)`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
 `;
 
 const LeaderboardWrapper = styled.div`

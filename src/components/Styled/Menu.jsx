@@ -1,12 +1,10 @@
 import styled from 'styled-components';
 
 const Page = styled.div`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
   display: flex;
+  flex: 1;
+  min-height: 100vh;
   justify-content: center;
-  align-items: center;
 `;
 
 const Header = styled.h1`
@@ -23,8 +21,8 @@ const Subheader = styled.h2`
 
 const Container = styled.div`
   display: flex;
-  align-self: center;
-  gap: 30px;
+  gap: 12px;
+  align-items: flex-start;
 `;
 
 export { Page, Header, Container, Subheader };

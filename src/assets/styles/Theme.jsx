@@ -30,7 +30,6 @@ const theme = {
     'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
   font: {
     display: "'Jost', Helvetica, Arial, sans-serif",
-    josefin: "'Josefin Sans', Helvetica, Arial, sans-serif",
     mono: "'Roboto Mono', Courier New, Courier, monospace",
   },
 };

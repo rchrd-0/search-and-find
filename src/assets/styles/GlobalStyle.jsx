@@ -3,13 +3,8 @@ import { createGlobalStyle } from 'styled-components';
 const GlobalStyle = createGlobalStyle`
 
 body {
-  display: flex;
-  min-height: 100vh;
   font-family: 'Jost', Arial, Helvetica, sans-serif;
   background-color: #3d3d3d;
-}
-
-body > #root {
 }
 
 a,

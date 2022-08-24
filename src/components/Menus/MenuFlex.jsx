@@ -11,10 +11,9 @@ MenuFlex.propTypes = {
 };
 
 const FlexWrapper = styled.div`
+  margin-top: 2%;
   display: flex;
   flex-direction: column;
-  position: fixed;
-  top: 5%;
   user-select: none;
 `;
 
