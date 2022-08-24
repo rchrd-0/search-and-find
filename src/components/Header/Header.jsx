@@ -50,8 +50,9 @@ const StyledHeader = styled.header`
   font-size: 1.8rem;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  background-color: ${(props) => props.theme.color.gray};
+  background-color: ${(props) => props.theme.color.darkGray};
   z-index: 3;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 const Heading = styled.h1`

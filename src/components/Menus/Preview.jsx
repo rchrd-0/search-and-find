@@ -69,22 +69,23 @@ Preview.propTypes = {
 
 const LayoutPreview = styled.div`
   display: grid;
-  grid-template-columns: 60px 1fr 60px;
+  grid-template-columns: 80px 1fr 80px;
   grid-template-rows: 1fr 100px;
-  width: 470px;
-  height: 630px;
+  width: 500px;
+  height: 700px;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.color.darkGray};
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  /* background-color: ${(props) => props.theme.color.darkGray}; */
+  /* background-color: #c2c2c2; */
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px; */
 `;
 
 const BackgroundImage = styled.div`
   grid-area: 1 / 1 / -1 / -1;
   background-image: url('${(props) => props.levelImg}');
-  background-color: ${(props) => props.theme.color.darkGray};
+  /* background-color: ${(props) => props.theme.color.darkGray}; */
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   border-radius: 8px;
   opacity: ${(props) => (props.active ? 1 : 0)};
@@ -98,7 +99,7 @@ const LevelSelect = styled.button`
   opacity: 0.4;
   transition: opacity 0.1s ease-in-out;
   background-image: url('${(props) => props.chevron}');
-  background-size: 70px;
+  background-size: contain;
   background-repeat: no-repeat;
   z-index: 1;
 

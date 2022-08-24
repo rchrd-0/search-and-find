@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import * as Menu from '../Styled/Menu';
 import * as formatTime from '../../helpers/formatTime';
 import gold from '../../assets/icons/crown.svg';
 import silver from '../../assets/icons/medal-silver.svg';
@@ -25,7 +26,7 @@ const Leaderboard = (props) => {
 
   return (
     <Layout>
-      <Heading>Leaderboard (Top 10)</Heading>
+      <Menu.Subheader>Leaderboard (Top 10)</Menu.Subheader>
       <List>
         {data.map((item, index) => (
           <ListItem key={item.id}>
@@ -53,11 +54,6 @@ const Layout = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-`;
-
-const Heading = styled.h2`
-  font-size: 1.5rem;
-  font-weight: 500;
 `;
 
 const List = styled.ul`

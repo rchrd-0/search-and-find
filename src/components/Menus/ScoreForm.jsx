@@ -31,7 +31,7 @@ const ScoreForm = (props) => {
       noValidate
     >
       <FormInstructions>
-        Submit your score (3 character names only)
+        Submit your time (3 character names only)
       </FormInstructions>
       <NameInput required value={name} onChange={handleInput} />
       <SubmitBtn type="submit">Submit</SubmitBtn>
@@ -49,7 +49,7 @@ const FormLayout = styled.form`
   justify-content: center;
   gap: 12px;
   width: 100%;
-  margin: 12px 0;
+  margin-top: 12px;
   padding: 0 24px;
   flex-wrap: wrap;
 `;
@@ -57,6 +57,7 @@ const FormLayout = styled.form`
 const FormInstructions = styled.div`
   width: 100%;
   font-weight: 300;
+  font-size: 1.1rem;
   text-align: center;
 `;
 
@@ -77,6 +78,7 @@ const NameInput = styled.input.attrs({
   outline: none;
   border: none;
   font-weight: 500;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
   &::placeholder {
     font-size: 1.1rem;

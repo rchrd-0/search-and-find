@@ -135,14 +135,14 @@ const App = () => {
     <>
       <GlobalStyle />
       <Theme>
-        <EndScreen
+        {/* <EndScreen
           level={level}
           handleGameRestart={handleGameRestart}
           addScore={addScore}
           score={score}
           leaderboard={leaderboard}
-        />
-        {/* <AppWrapper>{renderContent()}</AppWrapper> */}
+        /> */}
+        <AppWrapper>{renderContent()}</AppWrapper>
       </Theme>
     </>
   );

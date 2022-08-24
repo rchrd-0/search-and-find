@@ -27,14 +27,14 @@ const EndScreen = (props) => {
   return (
     <EndPage>
       <MenuFlex>
-        <Header>{thisLevel.name} complete!</Header>
+        <Header titleColor={level}>{thisLevel.name} complete!</Header>
         <Menu.Container>
           <LeaderboardWrapper>
             <Leaderboard data={leaderboard} />
           </LeaderboardWrapper>
 
           <GameScore>
-            <Heading>Results</Heading>
+            <Menu.Subheader>Results</Menu.Subheader>
             <TimeRow>
               <Subhead>Your time</Subhead>
               <Time>{formatTime.score(score)}</Time>
@@ -64,15 +64,16 @@ EndScreen.propTypes = {
 };
 
 const EndPage = styled(Menu.Page)`
-  background-color: rgba(31, 31, 31, 0.894);
+  background-color: rgba(85, 85, 85, 0.8);
   z-index: 5;
   top: 0;
   color: ${(props) => props.theme.color.menuText};
 `;
 
 const Header = styled(Menu.Header)`
-  color: white;
+  color: ${(props) => props.theme.color[props.titleColor]};
   align-self: center;
+  margin-bottom: 16px;
 `;
 
 const LeaderboardWrapper = styled.div`
@@ -83,7 +84,7 @@ const LeaderboardWrapper = styled.div`
 `;
 
 const GameScore = styled.div`
-  width: 350px;
+  width: 360px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,11 +94,6 @@ const GameScore = styled.div`
   border-radius: 8px;
   background-color: ${(props) => props.theme.color.menuBg};
   box-shadow: ${(props) => props.theme.menuShadow};
-`;
-
-const Heading = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 500;
 `;
 
 const Subhead = styled.h2`
@@ -120,8 +116,7 @@ const TimeRow = styled.div`
 
 const RestartBtn = styled(Button)`
   background-color: ${(props) => props.theme.color.invalid};
-  color: white;
-  font-weight: 500;
+  color: #eceef5;
   margin-top: 12px;
 `;
 

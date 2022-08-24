@@ -12,12 +12,16 @@ const theme = {
     gray: '#858585',
     darkGray: '#3d3d3d',
 
-    menuBg: '#262c48',
+    menuBg: 'rgba(47, 47, 47, 0.87)',
     menuText: '#d9dee9',
 
     valid: '#66bcc5',
     undefined: '#ffb74e',
     invalid: '#cc4b72',
+
+    snes: '#ca4e4e',
+    ps1: '#474389',
+    dreamcast: '#2681ac',
   },
   menuShadow:
     'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',

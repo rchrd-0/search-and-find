@@ -27,6 +27,10 @@ button {
   cursor: pointer;
 }
 
+button:focus {
+  outline: none;
+}
+
 `;
 
 export default GlobalStyle;

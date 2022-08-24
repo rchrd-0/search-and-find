@@ -16,13 +16,15 @@ const Header = styled.h1`
     0px 18px 23px rgba(0, 0, 0, 0.1);
 `;
 
+const Subheader = styled.h2`
+  font-size: 1.7rem;
+  font-weight: 500;
+`;
+
 const Container = styled.div`
   display: flex;
-  /* border-radius: 8px; */
-  /* box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px; */
   align-self: center;
   gap: 30px;
 `;
 
-export { Page, Header, Container };
+export { Page, Header, Container, Subheader };

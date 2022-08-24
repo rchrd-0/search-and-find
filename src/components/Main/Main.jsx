@@ -191,7 +191,8 @@ Main.propTypes = {
 
 const StyledMain = styled.main`
   user-select: none;
-  background-color: #3d3d3d;
+  /* background-color: #c2c2c2; */
+  background-color: ${(props) => props.theme.color.gray};
   overflow: hidden;
 `;
 

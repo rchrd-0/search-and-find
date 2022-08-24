@@ -14,8 +14,7 @@ const FlexWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: 10%;
-  gap: 16px;
+  top: 5%;
   user-select: none;
 `;
 

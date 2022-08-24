@@ -5,7 +5,10 @@ const Button = styled.button`
   border-radius: 4px;
   font-size: 1.2rem;
   font-weight: 500;
+  color: #262c48;
+  background-color: #c7c9d3;
   transition: all 0.1s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 
   &:active {
     filter: brightness(0.7);

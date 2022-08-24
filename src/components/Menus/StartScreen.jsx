@@ -41,20 +41,20 @@ const StartScreen = (props) => {
           />
 
           <MenuLeft>
-            <LevelName>{thisLevel.name}</LevelName>
+            <LevelName titleColor={level}>{thisLevel.name}</LevelName>
+            <ButtonWrapper>
+              <PlayBtn type="button" onClick={handleGameStart}>
+                Play
+              </PlayBtn>
+              <Button type="button" onClick={selectMenu}>
+                {leaderboardActive ? 'Characters' : 'Leaderboard'}
+              </Button>
+            </ButtonWrapper>
             {leaderboardActive ? (
               <Leaderboard data={leaderboard} />
             ) : (
               <LevelDetails level={level} charList={thisLevel.charList} />
             )}
-            <ButtonWrapper>
-              <Button type="button" onClick={handleGameStart}>
-                Play
-              </Button>
-              <Button type="button" onClick={selectMenu}>
-                {leaderboardActive ? 'Characters' : 'Leaderboard'}
-              </Button>
-            </ButtonWrapper>
           </MenuLeft>
         </Menu.Container>
       </MenuFlex>
@@ -96,17 +96,23 @@ const StartPage = styled(Menu.Page)`
 
 const MenuLeft = styled.div`
   width: 350px;
+  padding-bottom: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
   border-radius: 8px;
+  background-color: ${(props) => props.theme.color.menuBg};
+  box-shadow: ${(props) => props.theme.menuShadow};
+  align-self: center;
+  color: ${(props) => props.theme.color.menuText};
 `;
 
 const LevelName = styled.h1`
   font-size: 2.4rem;
   font-weight: 600;
-  margin-top: 20px;
+  margin-top: 12px;
+  color: ${(props) => props.theme.color[props.titleColor]};
+  text-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
 const Heading = styled(Menu.Header)`
@@ -123,7 +129,12 @@ const Accent = styled.span`
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 24px;
-  margin-top: 24px;
+  margin: 8px 0 16px;
+`;
+
+const PlayBtn = styled(Button)`
+  background-color: ${(props) => props.theme.color.valid};
+  color: #eceef5;
 `;
 
 export default StartScreen;
