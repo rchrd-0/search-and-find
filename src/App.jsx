@@ -141,7 +141,7 @@ const App = () => {
 };
 
 const AppWrapper = styled.div`
-  /* display: flex; */
+  display: flex;
 `;
 
 export default App;
