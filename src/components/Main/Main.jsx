@@ -98,7 +98,6 @@ const Main = (props) => {
       marginY: cursorOffset.getMenuMarginY(cursor.clientY),
     });
 
-    // console.log(e.clientY);
     setTarget({
       x: cursor.x * 100,
       y: cursor.y * 100 - relativeToHeader,
@@ -192,7 +191,6 @@ Main.propTypes = {
 
 const StyledMain = styled.main`
   user-select: none;
-  /* background-color: #c2c2c2; */
   background-color: ${(props) => props.theme.color.gray};
   background-image: url('${(props) => props.background}');
   background-size: cover;

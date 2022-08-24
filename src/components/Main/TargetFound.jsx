@@ -63,8 +63,9 @@ const Reticle = styled.div`
   left: ${(props) => props.xPos}%;
   width: 100px;
   height: 100px;
-  margin-top: -50px;
-  margin-left: -50px;
+  transform: translate(-50%, -50%);
+  /* margin-top: -50px;
+  margin-left: -50px; */
   background-image: url('${(props) => props.src}');
 `;
 

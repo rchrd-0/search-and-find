@@ -20,8 +20,7 @@ const StyledTarget = styled.div`
   position: absolute;
   top: ${(props) => props.target.y}%;
   left: ${(props) => props.target.x}%;
-  margin-left: -32px;
-  margin-top: -32px;
+  transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
   background-image: url('${(props) => props.src}');
