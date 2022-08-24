@@ -53,7 +53,7 @@ ContextMenu.propTypes = {
 };
 
 const StyledContext = styled.div`
-  width: 180px;
+  width: 210px;
   position: absolute;
   top: ${(props) => props.menu.y}%;
   left: ${(props) => props.menu.x}%;
@@ -62,35 +62,35 @@ const StyledContext = styled.div`
   display: flex;
   align-items: center;
   border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(31, 31, 31, 0.87);
+  color: ${(props) => props.theme.color.menuText};
   user-select: none;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: ${(props) => props.theme.menuShadow};
   cursor: pointer;
   z-index: 2;
 `;
 
 const List = styled.ul`
   flex: 1;
-  color: white;
   border-radius: 8px;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+  overflow: hidden;
 `;
 
 const ListItem = styled.li`
   display: flex;
-  padding: 8px 12px 8px 54px;
-  border-bottom: 1px solid white;
+  padding: 8px 12px 8px 60px;
   background-image: url('${(props) => props.img}');
-  background-size: 24px;
+  background-size: 32px;
   background-position: 16px center;
   background-repeat: no-repeat;
 
-  &:last-of-type {
-    border: none;
-  }
+  transition: all 0.2s ease-in-out;
 
   &:hover {
+    transform: scale(1.07);
+    background-color: rgba(102, 102, 102, 0.8);
+    transition: all 0.2s ease-in-out;
   }
 `;
 

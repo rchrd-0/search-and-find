@@ -6,7 +6,7 @@ const getClientSize = () => {
 };
 
 const appOffsets = {
-  contextMenuWidth: 180,
+  contextMenuWidth: 210,
   headerHeight: 60,
   cursorSizeHalf: 64 / 2,
   targetMenuGap: 16,
