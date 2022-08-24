@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import StartScreen from './components/Menus/StartScreen';
-import EndScreen from './components/Menus/EndScreen';
 import Main from './components/Main/Main';
 
 import GlobalStyle from './assets/styles/GlobalStyle';
@@ -135,13 +134,6 @@ const App = () => {
     <>
       <GlobalStyle />
       <Theme>
-        {/* <EndScreen
-          level={level}
-          handleGameRestart={handleGameRestart}
-          addScore={addScore}
-          score={score}
-          leaderboard={leaderboard}
-        /> */}
         <AppWrapper>{renderContent()}</AppWrapper>
       </Theme>
     </>

@@ -34,7 +34,7 @@ const levelManifest = [
   {
     id: 'ps1',
     img: 'ps1',
-    name: 'PlayStation 1',
+    name: 'Sony PlayStation 1',
     charList: [
       {
         id: 'castlevania',
@@ -53,7 +53,7 @@ const levelManifest = [
       },
       {
         id: 'ff7',
-        name: 'Cloud',
+        name: 'Cloud Strife',
         img: 'ps1-cloud',
       },
       {
@@ -66,7 +66,7 @@ const levelManifest = [
   {
     id: 'dreamcast',
     img: 'dreamcast',
-    name: 'Dreamcast',
+    name: 'Sega Dreamcast',
     charList: [
       {
         id: 'sonic',
@@ -92,6 +92,38 @@ const levelManifest = [
         id: 'powerstone',
         name: 'Edward Falcon',
         img: 'dreamcast-falcon',
+      },
+    ],
+  },
+  {
+    id: 'n64',
+    img: 'n64',
+    name: 'Nintendo 64',
+    charList: [
+      {
+        id: 'starfox',
+        name: 'Fox McCloud',
+        img: 'n64-fox',
+      },
+      {
+        id: 'luigi',
+        name: 'Luigi',
+        img: 'n64-luigi',
+      },
+      {
+        id: 'harvestmoon',
+        name: 'Pete',
+        img: 'n64-pete',
+      },
+      {
+        id: 'fzero',
+        name: 'Captain Falcon',
+        img: 'n64-falcon',
+      },
+      {
+        id: 'jetforce',
+        name: 'Vela',
+        img: 'n64-vela',
       },
     ],
   },
