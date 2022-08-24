@@ -64,7 +64,7 @@ EndScreen.propTypes = {
 };
 
 const EndPage = styled(Menu.Page)`
-  background-color: rgba(85, 85, 85, 0.8);
+  background-color: rgba(51, 51, 51, 0.78);
   z-index: 5;
   top: 0;
   color: ${(props) => props.theme.color.menuText};
