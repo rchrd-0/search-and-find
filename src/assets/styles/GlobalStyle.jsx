@@ -9,8 +9,8 @@ body {
 
 a,
 a:visited {
+  display: inline-block;
   text-decoration: none;
-  color: inherit; 
   user-select: none;
 }
 

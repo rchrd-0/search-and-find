@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as Menu from '../Styled/Menu';
+import ArtBy from '../Footer/ArtBy';
 import Button from '../Styled/Button';
 import MenuFlex from './MenuFlex';
 import Preview from './Preview';
@@ -38,7 +39,9 @@ const StartScreen = (props) => {
             img={imgs[`${level}.png`]}
             nextLevel={nextLevel}
             prevLevel={prevLevel}
-          />
+          >
+            <ArtBy level={level} />
+          </Preview>
 
           <MenuLeft>
             <LevelName titleColor={level}>{thisLevel.name}</LevelName>

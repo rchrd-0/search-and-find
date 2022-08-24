@@ -46,6 +46,7 @@ const EndScreen = (props) => {
           </GameScore>
         </MenuContainer>
       </MenuFlex>
+      {/* <Footer /> */}
     </EndPage>
   );
 };

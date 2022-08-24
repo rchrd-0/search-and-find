@@ -6,7 +6,7 @@ import chevronLeft from '../../assets/icons/chevron-left.svg';
 import chevronRight from '../../assets/icons/chevron-right.svg';
 
 const Preview = (props) => {
-  const { img, nextLevel, prevLevel } = props;
+  const { img, nextLevel, prevLevel, children } = props;
   const [active, setActive] = useState(false);
 
   const fadeOut = () => setActive(false);
@@ -57,6 +57,7 @@ const Preview = (props) => {
           nextLevel();
         }}
       />
+      {children}
     </LayoutPreview>
   );
 };
@@ -65,25 +66,21 @@ Preview.propTypes = {
   img: PropTypes.string,
   nextLevel: PropTypes.func,
   prevLevel: PropTypes.func,
+  children: PropTypes.node,
 };
 
 const LayoutPreview = styled.div`
   display: grid;
   grid-template-columns: 80px 1fr 80px;
-  grid-template-rows: 1fr 100px;
+  grid-template-rows: 1fr 100px 50px;
   width: 500px;
-  height: 700px;
+  height: 750px;
   border-radius: 8px;
-  /* background-color: ${(props) => props.theme.color.darkGray}; */
-  /* background-color: #c2c2c2; */
-  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px; */
 `;
 
 const BackgroundImage = styled.div`
-  grid-area: 1 / 1 / -1 / -1;
+  grid-area: 1 / 1 / 3 / -1;
   background-image: url('${(props) => props.levelImg}');
-  /* background-color: ${(props) => props.theme.color.darkGray}; */
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

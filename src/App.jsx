@@ -11,6 +11,7 @@ import * as levelSelection from './helpers/levelSelection';
 import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
 import * as firebase from './helpers/firebase';
+import Footer from './components/Footer/Footer';
 
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
@@ -100,14 +101,17 @@ const App = () => {
   const renderContent = () => {
     if (!gameStart && !gameOver) {
       return (
-        <StartScreen
-          level={level}
-          thisLevel={levelManifest.find((obj) => obj.id === level)}
-          handleGameStart={handleGameStart}
-          nextLevel={handleSelectNextLevel}
-          prevLevel={handleSelectPrevLevel}
-          leaderboard={leaderboard}
-        />
+        <>
+          <Footer />
+          <StartScreen
+            level={level}
+            thisLevel={levelManifest.find((obj) => obj.id === level)}
+            handleGameStart={handleGameStart}
+            nextLevel={handleSelectNextLevel}
+            prevLevel={handleSelectPrevLevel}
+            leaderboard={leaderboard}
+          />
+        </>
       );
     }
 
