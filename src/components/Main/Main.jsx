@@ -15,6 +15,7 @@ import Image from './Image';
 import * as cursorOffset from '../../helpers/cursorOffset';
 import cursor64 from '../../assets/icons/cursor64.svg';
 import isInRange from '../../helpers/checkGame';
+import background from '../../assets/images/background-dark.svg';
 
 const Main = (props) => {
   const {
@@ -129,7 +130,7 @@ const Main = (props) => {
         />
       ) : null}
 
-      <StyledMain>
+      <StyledMain background={background}>
         <Header
           characters={characters}
           charsRemaining={charsRemaining}
@@ -193,7 +194,8 @@ const StyledMain = styled.main`
   user-select: none;
   /* background-color: #c2c2c2; */
   background-color: ${(props) => props.theme.color.gray};
-  overflow: hidden;
+  background-image: url('${(props) => props.background}');
+  background-size: cover;
 `;
 
 const GameWrapper = styled.div`

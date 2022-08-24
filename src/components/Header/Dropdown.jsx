@@ -13,7 +13,7 @@ const Dropdown = (props) => {
     <DropdownMenu active={active}>
       {characters.map((item) => (
         <Character key={item.id} found={item.found}>
-          <Image img={imgs[`${item.img}.png`]} found={item.found} />
+          <Image img={imgs[`${item.img}-1.png`]} found={item.found} />
           {item.name}
         </Character>
       ))}
@@ -40,20 +40,21 @@ const DropdownMenu = styled.ul`
   padding: 12px 18px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   z-index: 1;
-  color: white;
-  font-size: 1.5rem;
+  color: ${(props) => props.theme.color.menuText};
+  font-size: 1.6rem;
   border-radius: 8px;
-  background-color: ${(props) => props.theme.color.darkGray};
-  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  background-color: ${(props) => props.theme.color.menuBg};
+  /* box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; */
+  box-shadow: ${(props) => props.theme.menuShadow};
   opacity: ${(props) => (props.active ? 1 : 0)};
   visibility: ${(props) => (props.active ? 'visible' : 'hidden')};
   transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
 `;
 
 const Image = styled.img`
-  width: 36px;
+  width: 42px;
   height: auto;
   content: url('${(props) => props.img}');
   filter: ${(props) => (props.found ? 'brightness(0.3)' : 'none')};
@@ -63,7 +64,7 @@ const Image = styled.img`
 const Character = styled.li`
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 20px;
   text-decoration: ${(props) => (props.found ? 'line-through' : 'none')};
   text-decoration-thickness: 3px;
 

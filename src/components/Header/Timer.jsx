@@ -31,7 +31,7 @@ const StyledTimer = styled.div`
   font-family: ${(props) => props.theme.font.mono};
   font-weight: 2rem;
   font-weight: 500;
-  color: #eceef5;
+  color: ${(props) => props.theme.color.darkText};
 `;
 
 export default Timer;

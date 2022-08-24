@@ -15,6 +15,8 @@ const theme = {
     menuBg: 'rgba(47, 47, 47, 0.87)',
     menuText: '#d9dee9',
 
+    darkText: '#2c2c48',
+
     valid: '#66bcc5',
     undefined: '#ffb74e',
     invalid: '#cc4b72',

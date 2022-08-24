@@ -50,7 +50,7 @@ const StyledHeader = styled.header`
   font-size: 1.8rem;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  background-color: ${(props) => props.theme.color.darkGray};
+  background-color: ${(props) => props.theme.color.gray};
   z-index: 3;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
@@ -58,7 +58,7 @@ const StyledHeader = styled.header`
 const Heading = styled.h1`
   font-style: italic;
   font-weight: 600;
-  color: ${(props) => props.theme.color.psRed};
+  color: ${(props) => props.theme.color.softRed};
   text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
     0px 18px 23px rgba(0, 0, 0, 0.1);
   font-size: 2rem;
@@ -66,7 +66,7 @@ const Heading = styled.h1`
 `;
 
 const Accent = styled.span`
-  color: #05ac9f;
+  color: ${(props) => props.theme.color.psGreen};
   font-weight: 400;
 `;
 
@@ -78,8 +78,8 @@ const NotiBubble = styled.div`
   height: 40px;
   border-radius: 8px;
   cursor: pointer;
-  color: #f2c300;
-  background-color: #2e6db4;
+  color: ${(props) => props.theme.color.psYellow};
+  background-color: ${(props) => props.theme.color.psBlue};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
