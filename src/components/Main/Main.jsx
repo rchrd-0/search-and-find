@@ -31,7 +31,7 @@ const Main = (props) => {
     leaderboard,
   } = props;
 
-  const [cursor, setCursor] = useState({ x: 0, y: 0, clientY: 0 });
+  const [cursor, setCursor] = useState({ x: null, y: null, clientY: null });
   const [menu, setMenu] = useState({ x: 0, y: 0, marginX: 0, marginY: 0 });
   const [target, setTarget] = useState({ x: 0, y: 0 });
   const [contextActive, setContextActive] = useState(false);
@@ -47,10 +47,10 @@ const Main = (props) => {
   const handleMainClick = (e) => {
     const { pageX, pageY, clientY } = e;
 
-    console.log(
-      pageX / mainRef.current.offsetWidth,
-      pageY / mainRef.current.offsetHeight
-    );
+    // console.log(
+    //   pageX / mainRef.current.offsetWidth,
+    //   pageY / mainRef.current.offsetHeight
+    // );
 
     setCursor({
       x: pageX / mainRef.current.offsetWidth,
@@ -93,22 +93,24 @@ const Main = (props) => {
 
   // Determines target & context menu placement on cursor state change
   useEffect(() => {
-    const { offsetWidth, offsetHeight } = mainRef.current;
-    const relativeToHeader = cursorOffset.getHeaderRelative(offsetHeight);
+    if (Object.values(cursor).every((val) => val !== null)) {
+      const { offsetWidth, offsetHeight } = mainRef.current;
+      const relativeToHeader = cursorOffset.getHeaderRelative(offsetHeight);
 
-    setMenu({
-      x: cursor.x * 100,
-      y: cursor.y * 100 - relativeToHeader,
-      marginX: cursorOffset.getMenuMarginX(offsetWidth, cursor.x),
-      marginY: cursorOffset.getMenuMarginY(cursor.clientY),
-    });
+      setMenu({
+        x: cursor.x * 100,
+        y: cursor.y * 100 - relativeToHeader,
+        marginX: cursorOffset.getMenuMarginX(offsetWidth, cursor.x),
+        marginY: cursorOffset.getMenuMarginY(cursor.clientY),
+      });
 
-    setTarget({
-      x: cursor.x * 100,
-      y: cursor.y * 100 - relativeToHeader,
-    });
+      setTarget({
+        x: cursor.x * 100,
+        y: cursor.y * 100 - relativeToHeader,
+      });
 
-    setContextActive((prevState) => !prevState);
+      setContextActive((prevState) => !prevState);
+    }
   }, [cursor]);
 
   // Snackbar fades out after 2.5s
