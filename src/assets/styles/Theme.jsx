@@ -25,8 +25,13 @@ const theme = {
     ps1: '#6C69B5',
     dreamcast: '#31A6D8',
     n64: '#b43a39',
-    // ps1: '#474389',
-    // dreamcast: '#2681ac',
+  },
+  iconFilter: {
+    softRed:
+      'invert(38%) sepia(38%) saturate(2574%) hue-rotate(321deg) brightness(102%) contrast(102%)',
+    ps1: 'invert(43%) sepia(14%) saturate(1663%) hue-rotate(203deg) brightness(97%) contrast(92%)',
+    dreamcast:
+      'invert(68%) sepia(10%) saturate(6827%) hue-rotate(166deg) brightness(88%) contrast(90%)',
   },
   menuShadow:
     'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
