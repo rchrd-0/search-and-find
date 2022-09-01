@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as Menu from '../Styled/Menu';
-import ArtBy from '../Footer/ArtBy';
 import Button from '../Styled/Button';
 import MenuFlex from './MenuFlex';
-import Preview from './Preview';
+import ImageCarousel from './ImageCarousel';
 import LevelDetails from './LevelDetails';
 import Leaderboard from './Leaderboard';
 import importAll from '../../helpers/importAll';
@@ -35,13 +34,11 @@ const StartScreen = (props) => {
           Retro<Accent>Search</Accent>
         </Heading>
         <Menu.Container>
-          <Preview
-            img={imgs[`${level}.png`]}
+          <ImageCarousel
+            level={level}
             nextLevel={nextLevel}
             prevLevel={prevLevel}
-          >
-            <ArtBy level={level} />
-          </Preview>
+          />
 
           <MenuLeft>
             <LevelName titleColor={level}>{thisLevel.name}</LevelName>

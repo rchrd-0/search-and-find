@@ -18,4 +18,8 @@ const getPreviousLevel = (currentLevel) => {
   return levelManifest[prev].id;
 };
 
-export { getNextLevel as nextLevel, getPreviousLevel as previousLevel };
+export {
+  getNextLevel as nextLevel,
+  getPreviousLevel as previousLevel,
+  getIndex,
+};
