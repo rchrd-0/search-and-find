@@ -25,7 +25,15 @@ const EndScreen = (props) => {
   };
 
   return (
-    <EndPage>
+    <EndPage
+      initial={{ opacity: 0 }}
+      animate={{
+        opacity: 1,
+        transition: {
+          duration: 0.5,
+        },
+      }}
+    >
       <MenuFlex>
         <Header titleColor={level}>{thisLevel.name} complete!</Header>
         <MenuContainer>
@@ -46,7 +54,6 @@ const EndScreen = (props) => {
           </GameScore>
         </MenuContainer>
       </MenuFlex>
-      {/* <Footer /> */}
     </EndPage>
   );
 };

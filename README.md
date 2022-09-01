@@ -7,6 +7,7 @@ A JavaScript (React) project from The Odin Project's [curriculum](https://www.th
 # Tools
 * [Firebase](https://firebase.google.com/)
 * [Styled Components](https://styled-components.com/)
+* [Framer Motion](https://www.framer.com/motion/)
 
 # Sources
 * Icons from [Feather](https://feathericons.com/) & [Glyphs](https://glyphs.fyi/)

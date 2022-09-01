@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import * as Menu from '../Styled/Menu';
+import Footer from '../Footer/Footer';
 import Button from '../Styled/Button';
 import MenuFlex from './MenuFlex';
 import ImageCarousel from './ImageCarousel';
@@ -28,7 +29,11 @@ const StartScreen = (props) => {
   const selectMenu = () => setLeaderboardActive((prevState) => !prevState);
 
   return (
-    <StartPage background={imgs['background.svg']}>
+    <StartPage
+      background={imgs['background.svg']}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <MenuFlex>
         <Heading>
           Retro<Accent>Search</Accent>
@@ -58,6 +63,7 @@ const StartScreen = (props) => {
           </MenuLeft>
         </Menu.Container>
       </MenuFlex>
+      <Footer />
     </StartPage>
   );
 };
@@ -92,6 +98,7 @@ const StartPage = styled(Menu.Page)`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: hidden;
 `;
 
 const MenuLeft = styled.div`

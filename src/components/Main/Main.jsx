@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
 import * as firebase from '../../helpers/firebase';
 
@@ -136,7 +137,16 @@ const Main = (props) => {
         />
       ) : null}
 
-      <StyledMain background={background}>
+      <StyledMain
+        background={background}
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: 1,
+          transition: {
+            duration: 0.5,
+          },
+        }}
+      >
         <Header
           characters={characters}
           charsRemaining={charsRemaining}
@@ -196,7 +206,9 @@ Main.propTypes = {
   ),
 };
 
-const StyledMain = styled.main`
+const Wrapper = styled(motion.div)``;
+
+const StyledMain = styled(motion.main)`
   user-select: none;
   background-color: ${(props) => props.theme.color.gray};
   background-image: url('${(props) => props.background}');

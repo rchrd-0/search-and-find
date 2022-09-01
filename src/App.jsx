@@ -11,7 +11,6 @@ import * as levelSelection from './helpers/levelSelection';
 import './assets/styles/fonts.css';
 import './assets/styles/reset.css';
 import * as firebase from './helpers/firebase';
-import Footer from './components/Footer/Footer';
 
 const App = () => {
   const [gameStart, setGameStart] = useState(false);
@@ -98,47 +97,36 @@ const App = () => {
     })();
   }, [gameOver, level]);
 
-  const renderContent = () => {
-    if (!gameStart && !gameOver) {
-      return (
-        <>
-          <Footer />
-          <StartScreen
-            level={level}
-            thisLevel={levelManifest.find((obj) => obj.id === level)}
-            handleGameStart={handleGameStart}
-            nextLevel={handleSelectNextLevel}
-            prevLevel={handleSelectPrevLevel}
-            leaderboard={leaderboard}
-          />
-        </>
-      );
-    }
-
-    if (gameStart) {
-      return (
-        <Main
-          gameStart={gameStart}
-          gameOver={gameOver}
-          level={level}
-          characters={characters}
-          charsRemaining={charsRemaining}
-          handleTargetFound={handleTargetFound}
-          handleGameRestart={handleGameRestart}
-          time={time}
-          score={score}
-          addScore={addScore}
-          leaderboard={leaderboard}
-        />
-      );
-    }
-  };
-
   return (
     <>
       <GlobalStyle />
       <Theme>
-        <AppWrapper>{renderContent()}</AppWrapper>
+        <AppWrapper>
+          {!gameStart && !gameOver ? (
+            <StartScreen
+              level={level}
+              thisLevel={levelManifest.find((obj) => obj.id === level)}
+              handleGameStart={handleGameStart}
+              nextLevel={handleSelectNextLevel}
+              prevLevel={handleSelectPrevLevel}
+              leaderboard={leaderboard}
+            />
+          ) : (
+            <Main
+              gameStart={gameStart}
+              gameOver={gameOver}
+              level={level}
+              characters={characters}
+              charsRemaining={charsRemaining}
+              handleTargetFound={handleTargetFound}
+              handleGameRestart={handleGameRestart}
+              time={time}
+              score={score}
+              addScore={addScore}
+              leaderboard={leaderboard}
+            />
+          )}
+        </AppWrapper>
       </Theme>
     </>
   );

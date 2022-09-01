@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-const Page = styled.div`
+const Page = styled(motion.div)`
   display: flex;
   flex: 1;
   min-height: 100vh;
