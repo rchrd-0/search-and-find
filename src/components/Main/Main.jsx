@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import * as firebase from '../../helpers/firebase';
 
 import EndScreen from '../Menus/EndScreen';
 import Header from '../Header/Header';
@@ -30,6 +29,7 @@ const Main = (props) => {
     addScore,
     score,
     leaderboard,
+    targets,
   } = props;
 
   const [cursor, setCursor] = useState({ x: null, y: null, clientY: null });
@@ -60,8 +60,8 @@ const Main = (props) => {
     });
   };
 
-  const handleContextMenuClick = async (id) => {
-    const characterCoord = await firebase.fetchTarget(id, level);
+  const handleContextMenuClick = (id) => {
+    const characterCoord = targets[id];
     const result = isInRange(cursor, characterCoord);
     if (result) {
       const { name } = characters.find((char) => char.id === id);
@@ -204,9 +204,13 @@ Main.propTypes = {
       score: PropTypes.number,
     })
   ),
+  targets: PropTypes.objectOf(
+    PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    })
+  ),
 };
-
-const Wrapper = styled(motion.div)``;
 
 const StyledMain = styled(motion.main)`
   user-select: none;

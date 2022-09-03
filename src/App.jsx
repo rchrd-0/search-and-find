@@ -21,10 +21,13 @@ const App = () => {
   const [characters, setCharacters] = useState([]);
   const [charsRemaining, setCharsRemaining] = useState(5);
   const [leaderboard, setLeaderboard] = useState([]);
+  const [targets, setTargets] = useState([]);
 
   const levelManifest = getLevelManifest();
 
-  const handleGameStart = () => {
+  const handleGameStart = async () => {
+    const targetData = await firebase.fetchCharacterList(level);
+    setTargets(targetData);
     setGameStart(true);
     setTime((prevState) => ({ ...prevState, start: Date.now() }));
   };
@@ -34,6 +37,7 @@ const App = () => {
     setGameOver(false);
     setTime({ start: null, end: null });
     setScore(null);
+    setTargets([]);
   };
 
   const handleSelectNextLevel = () => {
@@ -124,6 +128,7 @@ const App = () => {
               score={score}
               addScore={addScore}
               leaderboard={leaderboard}
+              targets={targets}
             />
           )}
         </AppWrapper>

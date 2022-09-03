@@ -15,13 +15,13 @@ import { db } from '../firebase/firebase-config';
 const fetchCharacterList = async (level) => {
   const docRef = doc(db, 'target', level);
   const characters = await getDoc(docRef);
-  return characters;
+  return characters.data();
 };
 
-const fetchTarget = async (id, level) => {
-  const characters = await fetchCharacterList(level);
-  return characters.exists() ? characters.data()[id] : console.log('Whoops!');
-};
+// const fetchTarget = async (id, level) => {
+//   const characters = await fetchCharacterList(level);
+//   // return characters.exists() ? characters.data()[id] : console.log('Whoops!');
+// };
 
 const fetchLeaderboard = async (level, n) => {
   const collectionRef = collection(db, `leaderboard-${level}`);
@@ -44,4 +44,4 @@ const addNewScore = async (level, score, name) => {
   });
 };
 
-export { fetchTarget, addNewScore, fetchLeaderboard };
+export { fetchCharacterList, addNewScore, fetchLeaderboard };
