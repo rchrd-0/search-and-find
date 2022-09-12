@@ -4,6 +4,12 @@ A JavaScript (React) project from The Odin Project's [curriculum](https://www.th
 * React hooks and lifecycle methods; fundamentals (components, states, props, create-react-app)
 * Working with a BaaS (Firebase)
 
+# Features
+* 5 levels, score/time submission and listing of top 10 scores on the leaderboard
+* Firebase's Cloud Firestore used for backend functions: 
+  * Level leaderboard data fetched and parsed
+  * Correct character x/y positions are fetched for the level on game start, stored as an object for that game instance for guess/click validation
+
 # Tools
 * [Firebase](https://firebase.google.com/)
 * [Styled Components](https://styled-components.com/)
